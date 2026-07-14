@@ -540,13 +540,13 @@ function generateMockData() {
 
 // INVOCATION OF SEED / STORAGE CHECK
 const isSeeded = localStorage.getItem(KEYS.PRODUCTS);
-const isV2Seeded = localStorage.getItem('imperio_verde_mock_v2');
+const isV3Seeded = localStorage.getItem('imperio_verde_mock_v3');
 
-if (!supabase && (!isSeeded || !isV2Seeded)) {
+if (!supabase && (!isSeeded || !isV3Seeded)) {
   localStorage.setItem(KEYS.PRODUCTS, JSON.stringify(productsSeed));
   localStorage.setItem(KEYS.KITS, JSON.stringify(initialKits));
   generateMockData();
-  localStorage.setItem('imperio_verde_mock_v2', 'true');
+  localStorage.setItem('imperio_verde_mock_v3', 'true');
 } else if (!supabase && isSeeded) {
   // Check if categories list is set, if not rebuild it
   if (!localStorage.getItem(KEYS.CATEGORIES)) {
