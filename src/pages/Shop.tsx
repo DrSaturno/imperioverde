@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { dbService, Product } from '../services/db';
 import { useCart } from '../context/CartContext';
-import { Search, Plus, Info, X, SlidersHorizontal, ChevronRight, HelpCircle } from 'lucide-react';
+import { Search, X, SlidersHorizontal, ChevronRight, HelpCircle } from 'lucide-react';
 
 export const getProductImage = (product: { image_url?: string; category?: string }) => {
   if (product.image_url) return product.image_url;
@@ -360,10 +360,6 @@ export const Shop: React.FC = () => {
                     onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
                     style={{ cursor: 'pointer' }}
                   />
-                  <div className="product-card-badge">
-                    <span className="badge badge-green" style={{ fontSize: '0.6rem' }}>Nivel: {product.difficulty_level}</span>
-                    {product.is_specialized && <span className="badge badge-violet" style={{ fontSize: '0.6rem' }}>Técnico</span>}
-                  </div>
                 </div>
 
                 <div className="product-card-body">
@@ -397,12 +393,12 @@ export const Shop: React.FC = () => {
                 </div>
 
                 <div className="product-card-footer">
-                  <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-outline" style={{ padding: '8px 12px', flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Ver Detalle">
-                    <Info size={14} />
+                  <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-outline product-card-action" title="Ver Producto">
+                    Ver Producto
                   </Link>
                   {product.stock > 0 ? (
-                    <button onClick={() => handleProductAdd(product)} className="btn btn-primary" style={{ padding: '8px 12px', flex: 3, fontSize: '0.8rem', whiteSpace: 'nowrap' }}>
-                      <Plus size={12} /> Agregar
+                    <button onClick={() => handleProductAdd(product)} className="btn btn-primary product-card-action">
+                      + Agregar
                     </button>
                   ) : (
                     <span style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.75rem', padding: '8px', borderRadius: '4px', textAlign: 'center', flex: 3, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Sin Stock</span>

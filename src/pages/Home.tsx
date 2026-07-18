@@ -347,10 +347,6 @@ export const Home: React.FC = () => {
                   onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
                   style={{ cursor: 'pointer' }}
                 />
-                <div className="product-card-badge">
-                  <span className="badge badge-green" style={{ fontSize: '0.6rem' }}>Nivel: {product.difficulty_level}</span>
-                  {product.is_specialized && <span className="badge badge-violet" style={{ fontSize: '0.6rem' }}>Técnico</span>}
-                </div>
               </div>
 
               <div className="product-card-body">

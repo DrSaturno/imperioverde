@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { dbService, Product } from '../services/db';
 import { ShoppingCart, Menu, X, Search, HelpCircle, Droplet, Flame, Gift, BookOpen, AlertCircle } from 'lucide-react';
@@ -66,15 +66,11 @@ export const Header: React.FC = () => {
 
       {/* Main Header */}
       <header style={{ backgroundColor: 'rgba(10, 27, 18, 0.9)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 90, borderBottom: '1px solid var(--border-glass)', padding: '16px 0' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+        <div className="container header-main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
           
           {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px' }} onClick={() => dbService.logEvent(sessionToken, 'logo_click', {})}>
-            <img src="/logotransparente.png" alt="Imperio Verde Logo" style={{ height: '45px', objectFit: 'contain' }} />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-neon)', lineHeight: 1.1 }}>IMPERIO VERDE</span>
-              <span style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: 'var(--text-secondary)' }}>GROW SHOP & HYDRO</span>
-            </div>
+          <Link to="/" className="header-logo-link" onClick={() => dbService.logEvent(sessionToken, 'logo_click', {})}>
+            <img src="/logo-header.png" alt="Imperio Verde Growshop" className="header-logo-image" />
           </Link>
 
           {/* Buscador */}
@@ -82,7 +78,7 @@ export const Header: React.FC = () => {
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative' }}>
               <input 
                 type="text" 
-                placeholder="¿Qué necesitás para tu cultivo? (Ej. Plagas, Silicio...)" 
+                placeholder="¿Qué necesitás para tu cultivo?"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -128,11 +124,11 @@ export const Header: React.FC = () => {
 
           {/* Navigation Links - Desktop */}
           <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '20px', fontFamily: 'var(--font-title)', fontSize: '0.95rem', fontWeight: 600 }}>
-            <Link to="/productos" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/productos' })} style={{ color: 'var(--text-secondary)' }} className="nav-link">Tienda</Link>
-            <Link to="/kits" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/kits' })} style={{ color: 'var(--action-yellow)' }} className="nav-link">Kits</Link>
-            <Link to="/hidroponia" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/hidroponia' })} style={{ color: '#e040fb' }} className="nav-link">Hidroponía</Link>
-            <Link to="/resolver" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver' })} style={{ color: 'var(--text-secondary)' }} className="nav-link">Resolver Problemas</Link>
-            <Link to="/guias" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/guias' })} style={{ color: 'var(--text-secondary)' }} className="nav-link">Guías</Link>
+            <NavLink to="/productos" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/productos' })} className={({ isActive }) => `header-nav-link${isActive ? ' is-active' : ''}`}>Tienda</NavLink>
+            <NavLink to="/kits" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/kits' })} className={({ isActive }) => `header-nav-link${isActive ? ' is-active' : ''}`}>Kits</NavLink>
+            <NavLink to="/hidroponia" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/hidroponia' })} className={({ isActive }) => `header-nav-link${isActive ? ' is-active' : ''}`}>Hidroponía</NavLink>
+            <NavLink to="/resolver" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver' })} className={({ isActive }) => `header-nav-link${isActive ? ' is-active' : ''}`}>Resolver Problemas</NavLink>
+            <NavLink to="/guias" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/guias' })} className={({ isActive }) => `header-nav-link${isActive ? ' is-active' : ''}`}>Guías</NavLink>
           </nav>
 
           {/* Right Icons */}
@@ -165,7 +161,7 @@ export const Header: React.FC = () => {
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative', marginBottom: '10px' }}>
               <input 
                 type="text" 
-                placeholder="Buscá fertilizantes, luces, extractor..." 
+                placeholder="¿Qué necesitás para tu cultivo?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="input" 
@@ -176,11 +172,11 @@ export const Header: React.FC = () => {
               </button>
             </form>
 
-            <Link to="/productos" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/productos', device: 'mobile' }); }} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Flame size={18} color="var(--accent-neon)" /> Tienda Completa</Link>
-            <Link to="/kits" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/kits', device: 'mobile' }); }} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--action-yellow)' }}><Gift size={18} /> Kits de Cultivo</Link>
-            <Link to="/hidroponia" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/hidroponia', device: 'mobile' }); }} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#e040fb' }}><Droplet size={18} /> Centro Hidropónico</Link>
-            <Link to="/resolver" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver', device: 'mobile' }); }} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><HelpCircle size={18} color="var(--text-secondary)" /> Resolver Problemas</Link>
-            <Link to="/guias" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/guias', device: 'mobile' }); }} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><BookOpen size={18} color="var(--text-secondary)" /> Guías y Consejos</Link>
+            <NavLink to="/productos" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/productos', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><Flame size={18} /> Tienda Completa</NavLink>
+            <NavLink to="/kits" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/kits', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><Gift size={18} /> Kits de Cultivo</NavLink>
+            <NavLink to="/hidroponia" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/hidroponia', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><Droplet size={18} /> Centro Hidropónico</NavLink>
+            <NavLink to="/resolver" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><HelpCircle size={18} /> Resolver Problemas</NavLink>
+            <NavLink to="/guias" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/guias', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><BookOpen size={18} /> Guías y Consejos</NavLink>
             
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>¿Necesitás ayuda con tu compra?</span>
@@ -200,8 +196,28 @@ export const Header: React.FC = () => {
 
       {/* Styles details to support hiding desktop/mobile parts */}
       <style>{`
-        .nav-link:hover {
-          color: var(--accent-neon) !important;
+        .header-logo-link {
+          display: flex;
+          align-items: center;
+          flex: 0 0 auto;
+        }
+        .header-logo-image {
+          display: block;
+          width: 168px;
+          height: auto;
+          object-fit: contain;
+        }
+        .header-nav-link {
+          color: var(--action-yellow);
+        }
+        .header-nav-link:hover,
+        .header-nav-link.is-active {
+          color: var(--accent-violet);
+        }
+        .mobile-menu-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
         .search-item-hover:hover {
           background-color: rgba(0, 230, 118, 0.05) !important;
@@ -215,6 +231,9 @@ export const Header: React.FC = () => {
           }
           .mobile-toggle {
             display: block;
+          }
+          .header-logo-image {
+            width: 148px;
           }
         }
       `}</style>
