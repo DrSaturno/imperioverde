@@ -109,7 +109,39 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. RESOLVE PROBLEMS SECTION */}
+      {/* 2. SECTIONS PORTAL / CATEGORIES */}
+      <section className="container">
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías de productos</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
+        </div>
+
+        <div className="category-carousel">
+          <div className="category-carousel-track">
+            {[...CATEGORIES, ...CATEGORIES].map((c, i) => (
+              <Link
+                key={`${c.cat}-${i}`}
+                to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
+                className="premium-cover-card category-carousel-item"
+                tabIndex={i < CATEGORIES.length ? 0 : -1}
+                aria-hidden={i >= CATEGORIES.length}
+              >
+                <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
+                <div className="premium-cover-card-overlay"></div>
+
+                <div className="premium-cover-card-content">
+                  <h3 style={{ fontSize: '1.1rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{c.label}</h3>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
+                    Explorar <ArrowRight size={12} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. RESOLVE PROBLEMS SECTION */}
       <section className="container">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>¿Qué necesitás resolver hoy?</h2>
@@ -176,7 +208,7 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. FEATURED KITS */}
+      {/* 4. FEATURED KITS */}
       <section className="container" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '60px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-glass)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
@@ -241,38 +273,6 @@ export const Home: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 4. SECTIONS PORTAL / CATEGORIES */}
-      <section className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías del E-commerce</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
-        </div>
-
-        <div className="category-carousel">
-          <div className="category-carousel-track">
-            {[...CATEGORIES, ...CATEGORIES].map((c, i) => (
-              <Link
-                key={`${c.cat}-${i}`}
-                to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
-                className="premium-cover-card category-carousel-item"
-                tabIndex={i < CATEGORIES.length ? 0 : -1}
-                aria-hidden={i >= CATEGORIES.length}
-              >
-                <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
-                <div className="premium-cover-card-overlay"></div>
-
-                <div className="premium-cover-card-content">
-                  <h3 style={{ fontSize: '1.1rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{c.label}</h3>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
-                    Explorar <ArrowRight size={12} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
