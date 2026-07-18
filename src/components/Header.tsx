@@ -56,16 +56,16 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* Promo Bar */}
-      <div style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '6px 0', fontSize: '0.8rem', textAlign: 'center', fontFamily: 'var(--font-title)' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
-          <span>🚛 Envíos Gratis en compras mayores a $60.000</span>
-          <span>🏠 Retiro Inmediato en Grow Sucursal</span>
-          <span>💳 3 Cuotas Sin Interés en todos los productos</span>
+      <div className="promo-bar" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '6px 0', fontSize: '0.8rem', textAlign: 'center', fontFamily: 'var(--font-title)' }}>
+        <div className="container promo-bar-content" style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
+          <span className="promo-bar-item">🚛 Envíos Gratis en compras mayores a $60.000</span>
+          <span className="promo-bar-item">🏠 Retiro Inmediato en Grow Sucursal</span>
+          <span className="promo-bar-item">💳 3 Cuotas Sin Interés en todos los productos</span>
         </div>
       </div>
 
       {/* Main Header */}
-      <header style={{ backgroundColor: '#ecd444', position: 'sticky', top: 0, zIndex: 90, borderBottom: '1px solid rgba(79,20,95,0.35)', padding: '16px 0', boxShadow: '0 6px 24px rgba(0,0,0,0.18)' }}>
+      <header className="site-header" style={{ position: 'sticky', top: 0, zIndex: 90, padding: '16px 0' }}>
         <div className="container header-main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
           
           {/* Logo */}
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
                 className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#50145f', cursor: 'pointer' }}>
+              <button type="submit" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer' }}>
                 <Search size={18} />
               </button>
             </form>
@@ -133,7 +133,7 @@ export const Header: React.FC = () => {
 
           {/* Right Icons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/carrito" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px', color: '#50145f' }}>
+            <Link to="/carrito" className="header-cart-link" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px' }}>
               <ShoppingCart size={22} />
               {totalItems > 0 && (
                 <span style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'var(--accent-neon)', color: '#030a06', fontSize: '0.75rem', fontWeight: 700, borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -146,7 +146,7 @@ export const Header: React.FC = () => {
             <button 
               onClick={() => setMenuOpen(!menuOpen)} 
               className="mobile-toggle"
-              style={{ background: 'none', border: 'none', color: '#50145f', cursor: 'pointer', padding: '4px' }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
             >
               {menuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
@@ -155,7 +155,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="mobile-nav" style={{ backgroundColor: '#ecd444', borderTop: '1px solid rgba(79,20,95,0.3)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', fontFamily: 'var(--font-title)', fontWeight: 600, position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 8px 24px rgba(0,0,0,0.35)', zIndex: 99 }}>
+          <div className="mobile-nav" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', fontFamily: 'var(--font-title)', fontWeight: 600, position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 99 }}>
             
             {/* Mobile Search */}
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative', marginBottom: '10px' }}>
@@ -167,7 +167,7 @@ export const Header: React.FC = () => {
                 className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#50145f' }}>
+              <button type="submit" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none' }}>
                 <Search size={18} />
               </button>
             </form>
@@ -178,8 +178,8 @@ export const Header: React.FC = () => {
             <NavLink to="/resolver" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><HelpCircle size={18} /> Resolver Problemas</NavLink>
             <NavLink to="/guias" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/guias', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><BookOpen size={18} /> Guías y Consejos</NavLink>
             
-            <div style={{ borderTop: '1px solid rgba(79,20,95,0.22)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', color: '#50145f' }}>¿Necesitás ayuda con tu compra?</span>
+            <div style={{ borderTop: '1px solid rgba(236,212,68,0.18)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>¿Necesitás ayuda con tu compra?</span>
               <a 
                 href="https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estoy%20navegando%20la%20tienda%20mobile%20y%20tengo%20una%20consulta."
                 target="_blank" 
@@ -196,6 +196,14 @@ export const Header: React.FC = () => {
 
       {/* Styles details to support hiding desktop/mobile parts */}
       <style>{`
+        .site-header {
+          background:
+            radial-gradient(circle at 28% 0%, rgba(142,36,170,0.16), transparent 34%),
+            linear-gradient(90deg, rgba(5,18,11,0.98), rgba(10,30,19,0.98) 52%, rgba(8,19,13,0.98));
+          border-bottom: 1px solid rgba(236,212,68,0.38);
+          box-shadow: 0 10px 32px rgba(0,0,0,0.3), 0 1px 0 rgba(142,36,170,0.18) inset;
+          backdrop-filter: blur(14px);
+        }
         .header-logo-link {
           display: flex;
           align-items: center;
@@ -208,23 +216,47 @@ export const Header: React.FC = () => {
           object-fit: contain;
         }
         .header-nav-link {
-          color: #5d176e;
+          color: #ecd444;
+          position: relative;
+          transition: color 180ms ease, transform 180ms ease;
         }
         .header-nav-link:hover,
         .header-nav-link.is-active {
-          color: #2f0839;
+          color: #d45aee;
+          transform: translateY(-1px);
+          text-shadow: 0 0 18px rgba(212,90,238,0.24);
         }
         .header-search-input {
-          background-color: rgba(255,255,255,0.38);
-          border-color: rgba(79,20,95,0.45);
-          color: #3b0c47;
+          background-color: rgba(2,10,6,0.62);
+          border-color: rgba(236,212,68,0.34);
+          color: #f4f8f5;
         }
         .header-search-input::placeholder {
-          color: rgba(79,20,95,0.72);
+          color: rgba(221,232,224,0.58);
         }
         .header-search-input:focus {
-          border-color: #5d176e;
-          box-shadow: 0 0 0 3px rgba(93,23,110,0.16);
+          border-color: #d45aee;
+          box-shadow: 0 0 0 3px rgba(142,36,170,0.15);
+        }
+        .header-search-button,
+        .header-cart-link,
+        .mobile-toggle {
+          color: #ecd444;
+          transition: color 180ms ease, transform 180ms ease;
+        }
+        .header-search-button:hover,
+        .header-cart-link:hover,
+        .mobile-toggle:hover {
+          color: #d45aee;
+          transform: translateY(-1px);
+        }
+        .mobile-nav {
+          background:
+            radial-gradient(circle at 90% 0%, rgba(142,36,170,0.2), transparent 45%),
+            linear-gradient(145deg, #06150d, #0b2115);
+          border-top: 1px solid rgba(236,212,68,0.25);
+          border-bottom: 1px solid rgba(236,212,68,0.2);
+          box-shadow: 0 16px 30px rgba(0,0,0,0.48);
         }
         .mobile-menu-link {
           display: flex;
@@ -246,6 +278,17 @@ export const Header: React.FC = () => {
           }
           .header-logo-image {
             width: 148px;
+          }
+        }
+        @media (max-width: 600px) {
+          .promo-bar {
+            padding: 7px 0 !important;
+          }
+          .promo-bar-content {
+            gap: 0 !important;
+          }
+          .promo-bar-item:not(:first-child) {
+            display: none;
           }
         }
       `}</style>

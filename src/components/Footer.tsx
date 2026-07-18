@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="site-footer" style={{ backgroundColor: '#ecd444', borderTop: '1px solid rgba(79,20,95,0.35)', padding: '60px 0 20px', marginTop: '60px', fontSize: '0.9rem', color: '#50145f' }}>
+    <footer className="site-footer" style={{ padding: '64px 0 20px', marginTop: '60px', fontSize: '0.9rem' }}>
       <div className="container">
         
         {/* Core grid */}
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer" 
                 aria-label="Instagram de Imperio Verde"
                 title="Instagram"
-                style={{ padding: '8px', backgroundColor: 'rgba(79,20,95,0.1)', borderRadius: '50%', color: '#50145f' }}
+                className="footer-social-link"
                 onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'instagram' })}
               >
                 <Instagram size={18} />
@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer" 
                 aria-label="WhatsApp de Imperio Verde"
                 title="WhatsApp"
-                style={{ padding: '8px', backgroundColor: 'rgba(79,20,95,0.1)', borderRadius: '50%', color: '#50145f' }}
+                className="footer-social-link"
                 onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'whatsapp' })}
               >
                 <MessageCircle size={18} />
@@ -91,25 +91,25 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details */}
           <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+            <h4 className="footer-heading" style={{ fontFamily: 'var(--font-title)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Contacto y Local
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
+              <span className="footer-heading-line"></span>
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.85rem' }}>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <MapPin size={18} style={{ color: '#5d176e', flexShrink: 0, marginTop: '2px' }} />
+                <MapPin size={18} className="footer-icon" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <span>Avenida Triunvirato 4135, Local 5 y 7, CABA, Argentina</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Phone size={16} style={{ color: '#5d176e', flexShrink: 0 }} />
+                <Phone size={16} className="footer-icon" style={{ flexShrink: 0 }} />
                 <a href="tel:+541153841079" className="footer-link">11 5384-1079</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Mail size={16} style={{ color: '#5d176e', flexShrink: 0 }} />
+                <Mail size={16} className="footer-icon" style={{ flexShrink: 0 }} />
                 <a href="mailto:imperioverdegrowshop@gmail.com" className="footer-link">imperioverdegrowshop@gmail.com</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <Clock size={18} style={{ color: '#5d176e', flexShrink: 0, marginTop: '2px' }} />
+                <Clock size={18} className="footer-icon" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <strong>Lunes a Viernes:</strong> 13:00 a 20:00 hs<br />
                   <strong>Sábados:</strong> 13:00 a 18:00 hs
@@ -120,9 +120,9 @@ export const Footer: React.FC = () => {
 
           {/* Policies & Links */}
           <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+            <h4 className="footer-heading" style={{ fontFamily: 'var(--font-title)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Ayuda al Cultivador
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
+              <span className="footer-heading-line"></span>
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
               <li><Link to="/productos" className="footer-link">Ver Catálogo de Insumos</Link></li>
@@ -130,21 +130,21 @@ export const Footer: React.FC = () => {
               <li><Link to="/hidroponia" className="footer-link">Sistemas y Guías Hidropónicas</Link></li>
               <li><Link to="/resolver" className="footer-link">Diagnóstico de Plagas y Clima</Link></li>
               <li><Link to="/guias" className="footer-link">Blog & Consejos de Cultivo</Link></li>
-              <li><Link to="/admin" className="footer-link" style={{ color: 'rgba(79,20,95,0.68)' }}>Panel Administrador</Link></li>
+              <li><Link to="/admin" className="footer-link footer-admin-link">Panel Administrador</Link></li>
             </ul>
           </div>
 
           {/* Newsletter Form */}
-          <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+          <div className="footer-newsletter">
+            <h4 className="footer-heading" style={{ fontFamily: 'var(--font-title)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Base de Datos Cultivadores
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
+              <span className="footer-heading-line"></span>
             </h4>
             <p style={{ fontSize: '0.8rem', lineHeight: 1.4, marginBottom: '12px' }}>
               Sumate para recibir guías de cultivo en PDF, checklists de mantenimiento y ofertas de reposición exclusivas.
             </p>
             {submitted ? (
-              <div style={{ backgroundColor: 'rgba(79,20,95,0.1)', border: '1px solid rgba(79,20,95,0.25)', padding: '12px', borderRadius: '4px', textAlign: 'center', fontSize: '0.8rem', color: '#50145f' }}>
+              <div style={{ backgroundColor: 'rgba(0,230,118,0.08)', border: '1px solid rgba(0,230,118,0.24)', padding: '12px', borderRadius: '8px', textAlign: 'center', fontSize: '0.8rem', color: '#9fffc9' }}>
                 <ShieldCheck size={18} style={{ display: 'block', margin: '0 auto 4px' }} />
                 ¡Te sumamos! Revisá tu correo para el PDF.
               </div>
@@ -198,11 +198,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Divider */}
-        <div style={{ borderTop: '1px solid rgba(79,20,95,0.18)', padding: '20px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '0.75rem' }}>
+        <div className="footer-bottom" style={{ padding: '20px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '0.75rem' }}>
           <div>
             © {new Date().getFullYear()} Imperio Verde Grow Shop. Todos los derechos reservados.
           </div>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'rgba(79,20,95,0.72)' }}>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'rgba(210,226,216,0.62)' }}>
             <span>💳 Mercado Pago</span>
             <span>🚛 Correo Argentino / Andreani</span>
             <span>🏠 Retiro Local</span>
@@ -211,24 +211,91 @@ export const Footer: React.FC = () => {
 
       </div>
       <style>{`
+        .site-footer {
+          position: relative;
+          overflow: hidden;
+          color: #bcd0c2;
+          background:
+            radial-gradient(circle at 12% 15%, rgba(236,212,68,0.08), transparent 28%),
+            radial-gradient(circle at 92% 18%, rgba(142,36,170,0.15), transparent 30%),
+            linear-gradient(135deg, #040c08 0%, #0a1d12 52%, #140a18 100%);
+          border-top: 1px solid rgba(236,212,68,0.34);
+          box-shadow: 0 -12px 40px rgba(0,0,0,0.22);
+        }
+        .site-footer::before {
+          content: '';
+          position: absolute;
+          inset: 0 0 auto 0;
+          height: 3px;
+          background: linear-gradient(90deg, #00e676 0%, #ecd444 48%, #8e24aa 100%);
+        }
+        .footer-heading {
+          color: #f5f8f6;
+        }
+        .footer-heading-line {
+          position: absolute;
+          bottom: -6px;
+          left: 0;
+          width: 34px;
+          height: 2px;
+          border-radius: 999px;
+          background: linear-gradient(90deg, #ecd444, #d45aee);
+        }
+        .footer-icon {
+          color: #ecd444;
+        }
+        .footer-social-link {
+          display: inline-flex;
+          padding: 9px;
+          border-radius: 50%;
+          color: #ecd444;
+          background-color: rgba(236,212,68,0.06);
+          border: 1px solid rgba(236,212,68,0.24);
+          transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+        }
+        .footer-social-link:hover {
+          color: #d45aee;
+          border-color: rgba(212,90,238,0.6);
+          background-color: rgba(142,36,170,0.12);
+          transform: translateY(-2px);
+        }
+        .footer-newsletter {
+          padding: 20px;
+          margin: -20px;
+          border: 1px solid rgba(142,36,170,0.22);
+          border-radius: 14px;
+          background: linear-gradient(145deg, rgba(142,36,170,0.11), rgba(0,230,118,0.025));
+        }
+        .footer-bottom {
+          border-top: 1px solid rgba(236,212,68,0.14);
+        }
         .footer-link {
+          color: #c8d8cd;
           transition: var(--transition-smooth);
         }
         .footer-link:hover {
-          color: #2f0839;
+          color: #ecd444;
           padding-left: 4px;
         }
+        .footer-admin-link {
+          color: rgba(188,208,194,0.58);
+        }
         .footer-input {
-          background-color: rgba(255,255,255,0.42);
-          border-color: rgba(79,20,95,0.38);
-          color: #3b0c47;
+          background-color: rgba(1,8,4,0.62);
+          border-color: rgba(236,212,68,0.22);
+          color: #f5f8f6;
         }
         .footer-input::placeholder {
-          color: rgba(79,20,95,0.64);
+          color: rgba(200,216,205,0.48);
         }
         .footer-input:focus {
-          border-color: #5d176e;
-          box-shadow: 0 0 0 3px rgba(93,23,110,0.14);
+          border-color: #d45aee;
+          box-shadow: 0 0 0 3px rgba(142,36,170,0.14);
+        }
+        @media (max-width: 600px) {
+          .footer-newsletter {
+            margin: 0;
+          }
         }
       `}</style>
     </footer>
