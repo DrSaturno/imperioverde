@@ -7,15 +7,15 @@ import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, ShieldCheck, Flame, 
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
-  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=600&auto=format&fit=crop' },
-  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: 'https://images.unsplash.com/photo-1536882240095-0379873feb4e?q=80&w=600&auto=format&fit=crop' }
+  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: '/home/category-fertilizantes.webp' },
+  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: '/home/category-sustratos.webp' },
+  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: '/home/category-iluminacion.webp' },
+  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: '/home/category-ventilacion.webp' },
+  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: '/home/category-macetas.webp' },
+  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: '/home/category-riego.webp' },
+  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: '/home/category-medicion.webp' },
+  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: '/home/category-plagas.webp' },
+  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: '/home/category-parafernalia.webp' }
 ];
 
 export const Home: React.FC = () => {
@@ -104,9 +104,9 @@ export const Home: React.FC = () => {
           style={{ 
             padding: '80px 40px', 
             borderRadius: 'var(--radius-lg)', 
-            backgroundImage: 'linear-gradient(135deg, rgba(10, 27, 18, 0.92) 0%, rgba(18, 40, 28, 0.82) 100%), url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1600&auto=format&fit=crop")',
+            backgroundImage: 'linear-gradient(90deg, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.9) 43%, rgba(3, 10, 6, 0.22) 75%, rgba(3, 10, 6, 0.08) 100%), url("/home/hero-cannabis.webp")',
             backgroundSize: 'cover', 
-            backgroundPosition: 'center',
+            backgroundPosition: 'center right',
             border: '1px solid rgba(0, 230, 118, 0.2)',
             display: 'flex',
             flexDirection: 'column',
@@ -153,46 +153,46 @@ export const Home: React.FC = () => {
               icon: '🌱',
               desc: 'Posibles causas de deficiencias, sustrato compactado o falta de enraizador. Ver soluciones.',
               path: '/resolver/crecimiento-lento',
-              img: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-crecimiento-lento.webp'
             },
             {
               title: 'Tengo una plaga o bichos',
               icon: '🐛',
               desc: 'Identificá araña roja, trips o mosca blanca y descubrí los preventivos y curativos ideales.',
               path: '/resolver/tengo-plagas',
-              img: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-plagas.webp'
             },
             {
               title: 'Controlar humedad o temperatura',
               icon: '💨',
               desc: 'Equipamiento de extracción, coolers, filtros antiolor y medidores de rango térmico.',
               path: '/resolver/controlar-humedad',
-              img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-clima.webp'
             },
             {
               title: 'Armar mi primer indoor',
               icon: '💡',
               desc: 'Calculadora de luces, extractores, carpas y configuraciones para comenzar de forma exitosa.',
               path: '/resolver/armar-indoor',
-              img: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-primer-indoor.webp'
             },
             {
               title: 'Empezar en Hidroponía',
               icon: '🧪',
               desc: 'Cultivo sin suelo. Baldes DWC, nutrientes tri-componente y medidores digitales EC.',
               path: '/hidroponia',
-              img: 'https://images.unsplash.com/photo-1584473457406-6240486418e9?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-hidroponia.webp'
             },
             {
               title: 'Mejorar peso y resina (Flora)',
               icon: '🌸',
               desc: 'Estimuladores de floración, azúcares carbohidratos y PK potenciadores de cogollos.',
               path: '/resolver/mejorar-floracion',
-              img: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop'
+              img: '/home/solution-floracion.webp'
             }
           ].map(item => (
             <Link key={item.path} to={item.path} className="premium-cover-card">
-              <img src={item.img} alt={item.title} className="premium-cover-card-img" />
+              <img src={item.img} alt={item.title} className="premium-cover-card-img" loading="lazy" decoding="async" />
               <div className="premium-cover-card-overlay"></div>
               
               <div className="premium-cover-card-content">
@@ -297,7 +297,7 @@ export const Home: React.FC = () => {
               to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
               className="premium-cover-card category-carousel-item"
             >
-              <img src={c.img} alt={c.label} className="premium-cover-card-img" />
+              <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
               <div className="premium-cover-card-overlay"></div>
 
               <div className="premium-cover-card-content">
@@ -476,7 +476,7 @@ export const Home: React.FC = () => {
               excerpt: 'Aprendé las bases fundamentales del cultivo sin suelo. Qué es el sistema DWC, cómo oxigenar el agua y cómo dosificar los nutrientes base.',
               cat: 'Hidroponía',
               time: '6 min lectura',
-              img: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=600&auto=format&fit=crop'
+              img: '/home/guide-hidroponia.webp'
             },
             {
               slug: 'como-elegir-luces-indoor',
@@ -484,7 +484,7 @@ export const Home: React.FC = () => {
               excerpt: 'Watts reales vs watts comerciales. Entendé el espectro PAR y cuánta potencia necesitás según los metros cuadrados de tu espacio indoor.',
               cat: 'Indoor',
               time: '5 min lectura',
-              img: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=600&auto=format&fit=crop'
+              img: '/home/guide-iluminacion-led.webp'
             },
             {
               slug: 'prevencion-de-plagas-indoor',
@@ -492,11 +492,11 @@ export const Home: React.FC = () => {
               excerpt: 'El control y la higiene son la mejor defensa. Cómo utilizar aceite de Neem, jabón potásico e insecticidas biológicos en vegetación.',
               cat: 'Prevención',
               time: '4 min lectura',
-              img: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?q=80&w=600&auto=format&fit=crop'
+              img: '/home/guide-prevencion-plagas.webp'
             }
           ].map(post => (
             <Link key={post.slug} to={`/guias/${post.slug}`} className="premium-cover-card">
-              <img src={post.img} alt={post.title} className="premium-cover-card-img" />
+              <img src={post.img} alt={post.title} className="premium-cover-card-img" loading="lazy" decoding="async" />
               <div className="premium-cover-card-overlay"></div>
               
               <div className="premium-cover-card-content">
