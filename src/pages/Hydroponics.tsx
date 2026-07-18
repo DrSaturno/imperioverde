@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { Droplet, ArrowRight, ShieldCheck, HelpCircle, Compass, RefreshCw, BarChart2 } from 'lucide-react';
 
 export const Hydroponics: React.FC = () => {
   const navigate = useNavigate();
   const { addToCart, addKitToCart, sessionToken } = useCart();
+  const { showToast } = useToast();
 
   // Wizard State
   const [step, setStep] = useState(1);
@@ -79,7 +81,7 @@ export const Hydroponics: React.FC = () => {
       }
     }
 
-    alert('¡Configuración recomendada agregada al carrito con éxito!');
+    showToast('Configuración recomendada agregada al carrito con éxito');
     navigate('/carrito');
   };
 
@@ -268,7 +270,7 @@ export const Hydroponics: React.FC = () => {
             {loading && (
               <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
                 <RefreshCw size={36} className="pulse-button" style={{ color: '#e040fb' }} />
-                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Calculando balances químicos y compatibilidad hidráulica...</div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Calculando balances químicos y compatibilidad hidráulica…</div>
               </div>
             )}
 

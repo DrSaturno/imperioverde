@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { ChevronRight, ShoppingCart, MessageSquare, Info, ShieldCheck, Truck, RefreshCw, Box, Plus } from 'lucide-react';
 import { getProductImage } from './Shop';
 
@@ -9,7 +10,8 @@ export const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, addKitToCart, sessionToken } = useCart();
-  
+  const { showToast } = useToast();
+
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
@@ -49,19 +51,19 @@ export const ProductDetails: React.FC = () => {
   if (!product) {
     return (
       <div className="container" style={{ padding: '60px 0', textAlign: 'center' }}>
-        <div style={{ color: 'var(--text-secondary)' }}>Cargando detalles del producto...</div>
+        <div style={{ color: 'var(--text-secondary)' }}>Cargando detalles del producto…</div>
       </div>
     );
   }
 
   const handleAddToCart = async () => {
     await addToCart(product, quantity);
-    alert(`¡Se agregaron ${quantity} unidades de "${product.name}" al carrito!`);
+    showToast(`Se agregaron ${quantity} unidades de "${product.name}" al carrito`);
   };
 
   const handleKitPurchase = async (kit: Kit) => {
     await addKitToCart(kit);
-    alert(`¡Se agregaron los componentes del "${kit.name}" con descuento!`);
+    showToast(`Se agregaron los componentes del "${kit.name}" con descuento`);
     navigate('/carrito');
   };
 
@@ -333,26 +335,23 @@ export const ProductDetails: React.FC = () => {
           <div className="grid grid-cols-4">
             {relatedProducts.map(item => (
               <div key={item.id} className="product-card">
-                <div className="product-card-img-container">
-                  <img 
-                    src={getProductImage(item)} 
-                    alt={item.name} 
-                    className="product-card-img" 
-                    onClick={() => navigate(`/productos/${item.category.toLowerCase()}/${item.id}`)}
-                    style={{ cursor: 'pointer' }}
+                <Link to={`/productos/${item.category.toLowerCase()}/${item.id}`} className="product-card-img-container">
+                  <img
+                    src={getProductImage(item)}
+                    alt={item.name}
+                    className="product-card-img"
                   />
-                </div>
+                </Link>
 
                 <div className="product-card-body">
                   <div className="product-card-brand">{item.brand}</div>
-                  <h3 
+                  <Link
+                    to={`/productos/${item.category.toLowerCase()}/${item.id}`}
                     className="product-card-title nav-link"
-                    onClick={() => navigate(`/productos/${item.category.toLowerCase()}/${item.id}`)}
-                    style={{ cursor: 'pointer' }}
                     title={item.name}
                   >
                     {item.name}
-                  </h3>
+                  </Link>
 
                   <div className="product-card-price-row">
                     {item.promotional_price ? (
@@ -378,7 +377,7 @@ export const ProductDetails: React.FC = () => {
                     <Info size={14} />
                   </Link>
                   {item.stock > 0 ? (
-                    <button onClick={() => addToCart(item, 1).then(() => alert(`¡"${item.name}" agregado al carrito!`))} className="btn btn-primary" style={{ padding: '8px 12px', flex: 3, fontSize: '0.8rem', whiteSpace: 'nowrap' }}>
+                    <button onClick={() => addToCart(item, 1).then(() => showToast(`"${item.name}" agregado al carrito`))} className="btn btn-primary" style={{ padding: '8px 12px', flex: 3, fontSize: '0.8rem', whiteSpace: 'nowrap' }}>
                       <Plus size={12} /> Agregar
                     </button>
                   ) : (

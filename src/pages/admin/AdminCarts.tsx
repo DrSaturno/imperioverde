@@ -89,7 +89,7 @@ export const AdminCarts: React.FC = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando sesiones...</td>
+                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando sesiones…</td>
               </tr>
             ) : carts.length > 0 ? (
               carts.map(c => {

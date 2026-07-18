@@ -1,15 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
-import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets, Wind, Sparkles } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
+import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets, Wind, Sparkles } from 'lucide-react';
 import { getProductImage } from './Shop';
+
+const CATEGORIES = [
+  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=600&auto=format&fit=crop' },
+  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: 'https://images.unsplash.com/photo-1536882240095-0379873feb4e?q=80&w=600&auto=format&fit=crop' }
+];
 
 export const Home: React.FC = () => {
   const { addToCart, addKitToCart, sessionToken } = useCart();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [kits, setKits] = useState<Kit[]>([]);
+  const categoriesScrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-rotate the categories carousel, pausing while the user is interacting with it
+  useEffect(() => {
+    const el = categoriesScrollRef.current;
+    if (!el) return;
+    let paused = false;
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+    el.addEventListener('touchstart', pause, { passive: true });
+
+    const interval = setInterval(() => {
+      if (paused) return;
+      const cardStep = 276;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + cardStep, behavior: 'smooth' });
+    }, 3500);
+
+    return () => {
+      clearInterval(interval);
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', resume);
+      el.removeEventListener('touchstart', pause);
+    };
+  }, []);
+
+  const scrollCategories = (dir: 1 | -1) => {
+    categoriesScrollRef.current?.scrollBy({ left: dir * 276, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     // Fetch top products and kits
@@ -27,12 +72,12 @@ export const Home: React.FC = () => {
 
   const handleProductAdd = async (product: Product) => {
     await addToCart(product, 1);
-    alert(`¡"${product.name}" agregado al carrito!`);
+    showToast(`"${product.name}" agregado al carrito`);
   };
 
   const handleKitAdd = async (kit: Kit) => {
     await addKitToCart(kit);
-    alert(`¡Componentes del "${kit.name}" agregados con descuento!`);
+    showToast(`Componentes del "${kit.name}" agregados con descuento`);
     navigate('/carrito');
   };
 
@@ -59,7 +104,7 @@ export const Home: React.FC = () => {
           style={{ 
             padding: '80px 40px', 
             borderRadius: 'var(--radius-lg)', 
-            backgroundImage: 'linear-gradient(135deg, rgba(10, 27, 18, 0.95) 0%, rgba(18, 40, 28, 0.7) 100%), url("/IMG Perfil_4.png")',
+            backgroundImage: 'linear-gradient(135deg, rgba(10, 27, 18, 0.92) 0%, rgba(18, 40, 28, 0.82) 100%), url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1600&auto=format&fit=crop")',
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
             border: '1px solid rgba(0, 230, 118, 0.2)',
@@ -108,7 +153,7 @@ export const Home: React.FC = () => {
               icon: '🌱',
               desc: 'Posibles causas de deficiencias, sustrato compactado o falta de enraizador. Ver soluciones.',
               path: '/resolver/crecimiento-lento',
-              img: 'https://images.unsplash.com/photo-1530983824418-91136267e122?q=80&w=600&auto=format&fit=crop'
+              img: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=600&auto=format&fit=crop'
             },
             {
               title: 'Tengo una plaga o bichos',
@@ -146,7 +191,7 @@ export const Home: React.FC = () => {
               img: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop'
             }
           ].map(item => (
-            <div key={item.path} className="premium-cover-card" onClick={() => navigate(item.path)}>
+            <Link key={item.path} to={item.path} className="premium-cover-card">
               <img src={item.img} alt={item.title} className="premium-cover-card-img" />
               <div className="premium-cover-card-overlay"></div>
               
@@ -160,7 +205,7 @@ export const Home: React.FC = () => {
                   Ver Soluciones <ArrowRight size={12} />
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -200,7 +245,7 @@ export const Home: React.FC = () => {
                   {kit.products.slice(0, 3).map(kp => (
                     <li key={kp.product_id}>• {kp.quantity}x {kp.product?.name || 'Insumo'}</li>
                   ))}
-                  {kit.products.length > 3 && <li>y {kit.products.length - 3} componente(s) más...</li>}
+                  {kit.products.length > 3 && <li>y {kit.products.length - 3} componente(s) más…</li>}
                 </ul>
               </div>
 
@@ -230,32 +275,31 @@ export const Home: React.FC = () => {
 
       {/* 4. SECTIONS PORTAL / CATEGORIES */}
       <section className="container">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías del E-commerce</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
+          <div>
+            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías del E-commerce</h2>
+            <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button onClick={() => scrollCategories(-1)} className="btn btn-outline category-carousel-arrow" aria-label="Categoría anterior">
+              <ChevronLeft size={18} />
+            </button>
+            <button onClick={() => scrollCategories(1)} className="btn btn-outline category-carousel-arrow" aria-label="Categoría siguiente">
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
-          {[
-            { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=600&auto=format&fit=crop' },
-            { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: 'https://images.unsplash.com/photo-1606166325012-7da4a0fc0a0b?q=80&w=600&auto=format&fit=crop' }
-          ].map(c => (
-            <div 
-              key={c.cat} 
-              onClick={() => navigate(`/productos?categoria=${encodeURIComponent(c.cat)}`)}
-              className="premium-cover-card"
-              style={{ height: '220px' }}
+        <div className="category-carousel" ref={categoriesScrollRef}>
+          {CATEGORIES.map(c => (
+            <Link
+              key={c.cat}
+              to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
+              className="premium-cover-card category-carousel-item"
             >
               <img src={c.img} alt={c.label} className="premium-cover-card-img" />
               <div className="premium-cover-card-overlay"></div>
-              
+
               <div className="premium-cover-card-content">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ fontSize: '1.5rem' }}>{c.icon}</span>
@@ -265,7 +309,7 @@ export const Home: React.FC = () => {
                   Explorar <ArrowRight size={12} />
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -277,7 +321,7 @@ export const Home: React.FC = () => {
           style={{ 
             padding: '60px 40px', 
             borderRadius: 'var(--radius-lg)', 
-            backgroundImage: 'linear-gradient(135deg, rgba(20, 10, 30, 0.95) 0%, rgba(142, 36, 170, 0.25) 100%), url("/IMG Perfil_2.png")',
+            backgroundImage: 'linear-gradient(135deg, rgba(20, 10, 30, 0.94) 0%, rgba(142, 36, 170, 0.35) 100%), url("https://images.unsplash.com/photo-1584473457406-6240486418e9?q=80&w=1600&auto=format&fit=crop")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             border: '1px solid rgba(142, 36, 170, 0.4)',
@@ -339,26 +383,23 @@ export const Home: React.FC = () => {
         <div className="grid grid-cols-4">
           {featuredProducts.map(product => (
             <div key={product.id} className="product-card">
-              <div className="product-card-img-container">
-                <img 
-                  src={getProductImage(product)} 
-                  alt={product.name} 
-                  className="product-card-img" 
-                  onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
-                  style={{ cursor: 'pointer' }}
+              <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="product-card-img-container">
+                <img
+                  src={getProductImage(product)}
+                  alt={product.name}
+                  className="product-card-img"
                 />
-              </div>
+              </Link>
 
               <div className="product-card-body">
                 <div className="product-card-brand">{product.brand}</div>
-                <h3 
+                <Link
+                  to={`/productos/${product.category.toLowerCase()}/${product.id}`}
                   className="product-card-title nav-link"
-                  onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
-                  style={{ cursor: 'pointer' }}
                   title={product.name}
                 >
                   {product.name}
-                </h3>
+                </Link>
 
                 <div className="product-card-price-row">
                   {product.promotional_price ? (
@@ -380,7 +421,7 @@ export const Home: React.FC = () => {
               </div>
 
               <div className="product-card-footer">
-                <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-outline" style={{ padding: '8px 12px', flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Ver Detalle">
+                <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-yellow" style={{ padding: '8px 12px', flex: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Ver Detalle">
                   <Info size={14} />
                 </Link>
                 {product.stock > 0 ? (
@@ -388,7 +429,7 @@ export const Home: React.FC = () => {
                     <Plus size={12} /> Agregar
                   </button>
                 ) : (
-                  <span style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.75rem', padding: '8px', borderRadius: '4px', textAlign: 'center', flex: 3, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Sin Stock</span>
+                  <span className="btn" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', border: '1px solid var(--border-glass)', padding: '8px', flex: 3, fontSize: '0.8rem', cursor: 'not-allowed' }}>Sin Stock</span>
                 )}
               </div>
             </div>
@@ -454,7 +495,7 @@ export const Home: React.FC = () => {
               img: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?q=80&w=600&auto=format&fit=crop'
             }
           ].map(post => (
-            <div key={post.slug} className="premium-cover-card" onClick={() => navigate(`/guias/${post.slug}`)}>
+            <Link key={post.slug} to={`/guias/${post.slug}`} className="premium-cover-card">
               <img src={post.img} alt={post.title} className="premium-cover-card-img" />
               <div className="premium-cover-card-overlay"></div>
               
@@ -469,7 +510,7 @@ export const Home: React.FC = () => {
                   Leer Guía Completa <ArrowRight size={12} />
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

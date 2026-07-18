@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { dbService, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { Sparkles, ArrowRight, ShieldAlert, BadgeInfo } from 'lucide-react';
 
 export const Kits: React.FC = () => {
   const [kits, setKits] = useState<Kit[]>([]);
   const { addKitToCart, sessionToken } = useCart();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   // Filters
@@ -34,12 +36,12 @@ export const Kits: React.FC = () => {
     // Check stock of components
     const hasStock = kit.products.every(kp => (kp.product?.stock || 0) >= kp.quantity);
     if (!hasStock) {
-      alert('Disculpas. Algunos de los componentes de este kit se encuentran agotados. Consultanos por WhatsApp alternativas.');
+      showToast('Algunos de los componentes de este kit se encuentran agotados. Consultanos por WhatsApp alternativas.', 'error');
       return;
     }
 
     await addKitToCart(kit);
-    alert(`¡Se agregaron los componentes de "${kit.name}" al carrito con ${kit.discount_percentage}% de descuento!`);
+    showToast(`Se agregaron los componentes de "${kit.name}" al carrito con ${kit.discount_percentage}% de descuento`);
     navigate('/carrito');
   };
 
@@ -89,6 +91,34 @@ export const Kits: React.FC = () => {
           </button>
         )}
       </div>
+
+      {/* Empty state */}
+      {filteredKits.length === 0 && (
+        <div className="glass-card" style={{ textAlign: 'center', padding: '60px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+          <BadgeInfo size={32} style={{ color: 'var(--accent-neon)' }} />
+          <h3 style={{ fontSize: '1.3rem', fontFamily: 'var(--font-title)' }}>
+            {kits.length === 0 ? 'Todavía no hay kits publicados' : 'No encontramos kits con esos filtros'}
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '480px' }}>
+            {kits.length === 0
+              ? 'Estamos armando nuestras combinaciones. Mientras tanto, contanos qué querés cultivar y te armamos un kit a medida por WhatsApp.'
+              : 'Probá con otro entorno de cultivo o nivel, o pedinos una combinación a medida.'}
+          </p>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {(envFilter || levelFilter) && (
+              <button onClick={() => { setEnvFilter(''); setLevelFilter(''); }} className="btn btn-outline">Limpiar filtros</button>
+            )}
+            <a
+              href="https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20quiero%20armar%20un%20kit%20a%20medida%20para%20mi%20cultivo."
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-primary"
+            >
+              Armar mi kit por WhatsApp
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* Kits list */}
       <div className="grid grid-cols-3">

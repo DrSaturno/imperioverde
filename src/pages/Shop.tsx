@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { dbService, Product } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { Search, X, SlidersHorizontal, ChevronRight, HelpCircle } from 'lucide-react';
 
 export const getProductImage = (product: { image_url?: string; category?: string }) => {
@@ -18,7 +19,7 @@ export const getProductImage = (product: { image_url?: string; category?: string
     case 'Macetas':
       return 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=600&auto=format&fit=crop';
     case 'Riego':
-      return 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?q=80&w=600&auto=format&fit=crop';
+      return 'https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=600&auto=format&fit=crop';
     case 'Control de Plagas':
       return 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?q=80&w=600&auto=format&fit=crop';
     case 'Iluminación':
@@ -34,7 +35,8 @@ export const Shop: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart, sessionToken } = useCart();
-  
+  const { showToast } = useToast();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
@@ -125,7 +127,7 @@ export const Shop: React.FC = () => {
 
   const handleProductAdd = async (product: Product) => {
     await addToCart(product, 1);
-    alert(`¡"${product.name}" agregado al carrito!`);
+    showToast(`"${product.name}" agregado al carrito`);
   };
 
   const handleCategorySelect = (cat: string) => {
@@ -352,26 +354,23 @@ export const Shop: React.FC = () => {
           <div className="grid grid-cols-3">
             {filteredProducts.map(product => (
               <div key={product.id} className="product-card">
-                <div className="product-card-img-container">
-                  <img 
-                    src={getProductImage(product)} 
-                    alt={product.name} 
-                    className="product-card-img" 
-                    onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
-                    style={{ cursor: 'pointer' }}
+                <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="product-card-img-container">
+                  <img
+                    src={getProductImage(product)}
+                    alt={product.name}
+                    className="product-card-img"
                   />
-                </div>
+                </Link>
 
                 <div className="product-card-body">
                   <div className="product-card-brand">{product.brand}</div>
-                  <h3 
+                  <Link
+                    to={`/productos/${product.category.toLowerCase()}/${product.id}`}
                     className="product-card-title nav-link"
-                    onClick={() => navigate(`/productos/${product.category.toLowerCase()}/${product.id}`)}
-                    style={{ cursor: 'pointer' }}
                     title={product.name}
                   >
                     {product.name}
-                  </h3>
+                  </Link>
 
                   <div className="product-card-price-row">
                     {product.promotional_price ? (
@@ -393,7 +392,7 @@ export const Shop: React.FC = () => {
                 </div>
 
                 <div className="product-card-footer">
-                  <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-outline product-card-action" title="Ver Producto">
+                  <Link to={`/productos/${product.category.toLowerCase()}/${product.id}`} className="btn btn-yellow product-card-action" title="Ver Producto">
                     Ver Producto
                   </Link>
                   {product.stock > 0 ? (
@@ -401,7 +400,7 @@ export const Shop: React.FC = () => {
                       + Agregar
                     </button>
                   ) : (
-                    <span style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.75rem', padding: '8px', borderRadius: '4px', textAlign: 'center', flex: 3, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Sin Stock</span>
+                    <span className="btn product-card-action" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', border: '1px solid var(--border-glass)', cursor: 'not-allowed' }}>Sin Stock</span>
                   )}
                 </div>
               </div>

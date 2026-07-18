@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { dbService, OrderItem, Product } from '../services/db';
 import { ShieldCheck, ArrowLeft, RefreshCw, CheckCircle2, ChevronRight, HelpCircle } from 'lucide-react';
 
 export const Checkout: React.FC = () => {
   const { cart, sessionToken, totalAmount, clearCart, setContactInfo, addToCart } = useCart();
+  const { showToast } = useToast();
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export const Checkout: React.FC = () => {
         setOrderSuccess(newOrder);
         await clearCart();
       } else {
-        alert('Disculpas. Hubo un error de stock en los productos seleccionados. Verificá tu carrito.');
+        showToast('Hubo un error de stock en los productos seleccionados. Verificá tu carrito.', 'error');
         navigate('/carrito');
       }
       setLoading(false);
@@ -148,17 +150,17 @@ export const Checkout: React.FC = () => {
               <h3 style={{ fontFamily: 'var(--font-title)', fontSize: '1.2rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '8px' }}>1. Datos del Cliente</h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Nombre Completo *</span>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="input" required />
+                  <label htmlFor="checkout-name" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Nombre Completo *</label>
+                  <input id="checkout-name" type="text" autoComplete="name" name="name" value={name} onChange={(e) => setName(e.target.value)} className="input" required />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Teléfono Celular *</span>
-                  <input type="tel" placeholder="1153841079" value={phone} onChange={(e) => handleContactChange('phone', e.target.value)} className="input" required />
+                  <label htmlFor="checkout-phone" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Teléfono Celular *</label>
+                  <input id="checkout-phone" type="tel" inputMode="tel" autoComplete="tel" name="tel" placeholder="1153841079" value={phone} onChange={(e) => handleContactChange('phone', e.target.value)} className="input" required />
                 </div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Email *</span>
-                <input type="email" placeholder="email@correo.com" value={email} onChange={(e) => handleContactChange('email', e.target.value)} className="input" required />
+                <label htmlFor="checkout-email" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Email *</label>
+                <input id="checkout-email" type="email" autoComplete="email" name="email" spellCheck={false} placeholder="email@correo.com" value={email} onChange={(e) => handleContactChange('email', e.target.value)} className="input" required />
               </div>
             </div>
 
@@ -183,8 +185,8 @@ export const Checkout: React.FC = () => {
               </div>
               {shippingMethod === 'delivery' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Dirección de Entrega Completa (Calle, Altura, Localidad, CP) *</span>
-                  <input type="text" value={shippingAddress} onChange={(e) => setShippingAddress(e.target.value)} className="input" placeholder="Av. Corrientes 1234, 4° B, CABA" required />
+                  <label htmlFor="checkout-address" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Dirección de Entrega Completa (Calle, Altura, Localidad, CP) *</label>
+                  <input id="checkout-address" type="text" autoComplete="street-address" name="street-address" value={shippingAddress} onChange={(e) => setShippingAddress(e.target.value)} className="input" placeholder="Av. Corrientes 1234, 4° B, CABA…" required />
                 </div>
               )}
             </div>
@@ -200,21 +202,21 @@ export const Checkout: React.FC = () => {
               {paymentMethod === 'tarjeta' ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Número de Tarjeta (Simulado) *</span>
-                    <input type="text" placeholder="4539 0000 0000 0000" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} className="input" required />
+                    <label htmlFor="checkout-card-number" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Número de Tarjeta (Simulado) *</label>
+                    <input id="checkout-card-number" type="text" inputMode="numeric" autoComplete="cc-number" spellCheck={false} placeholder="4539 0000 0000 0000" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} className="input" required />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Nombre impreso en Tarjeta *</span>
-                    <input type="text" placeholder="JUAN PEREZ" value={cardName} onChange={(e) => setCardName(e.target.value.toUpperCase())} className="input" required />
+                    <label htmlFor="checkout-card-name" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Nombre impreso en Tarjeta *</label>
+                    <input id="checkout-card-name" type="text" autoComplete="cc-name" placeholder="JUAN PEREZ" value={cardName} onChange={(e) => setCardName(e.target.value.toUpperCase())} className="input" required />
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Vencimiento (MM/AA) *</span>
-                      <input type="text" placeholder="12/28" value={cardExpiry} onChange={(e) => setCardExpiry(e.target.value)} className="input" required />
+                      <label htmlFor="checkout-card-expiry" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Vencimiento (MM/AA) *</label>
+                      <input id="checkout-card-expiry" type="text" inputMode="numeric" autoComplete="cc-exp" placeholder="12/28" value={cardExpiry} onChange={(e) => setCardExpiry(e.target.value)} className="input" required />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>CVV / Cód. Seguridad *</span>
-                      <input type="text" placeholder="123" value={cardCvv} onChange={(e) => setCardCvv(e.target.value)} className="input" required />
+                      <label htmlFor="checkout-card-cvv" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>CVV / Cód. Seguridad *</label>
+                      <input id="checkout-card-cvv" type="text" inputMode="numeric" autoComplete="cc-csc" spellCheck={false} placeholder="123" value={cardCvv} onChange={(e) => setCardCvv(e.target.value)} className="input" required />
                     </div>
                   </div>
                 </div>
@@ -254,7 +256,7 @@ export const Checkout: React.FC = () => {
 
               {loading ? (
                 <button type="button" className="btn btn-primary" style={{ width: '100%', padding: '14px', display: 'flex', justifyItems: 'center', justifyContent: 'center', gap: '10px' }} disabled>
-                  <RefreshCw size={18} className="pulse-button" /> Procesando pago seguro...
+                  <RefreshCw size={18} className="pulse-button" /> Procesando pago seguro…
                 </button>
               ) : (
                 <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: 700 }}>
@@ -310,7 +312,7 @@ export const Checkout: React.FC = () => {
                           </div>
                           <button 
                             type="button"
-                            onClick={() => addToCart(item, 1).then(() => alert(`¡"${item.name}" agregado al pedido!`))} 
+                            onClick={() => addToCart(item, 1).then(() => showToast(`"${item.name}" agregado al pedido`))} 
                             className="btn btn-primary" 
                             style={{ padding: '4px 8px', fontSize: '0.7rem' }}
                           >

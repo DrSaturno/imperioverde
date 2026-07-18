@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { dbService, Product } from '../services/db';
 import { ShoppingBag, Trash2, ArrowRight, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, rawTotal, totalAmount, totalSavings, addToCart } = useCart();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
@@ -79,9 +81,9 @@ export const Cart: React.FC = () => {
                 
                 {/* Quantity input */}
                 <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
-                  <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} style={{ padding: '4px 12px', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>-</button>
+                  <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} aria-label={`Restar unidad de ${item.product.name}`} style={{ padding: '4px 12px', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>-</button>
                   <span style={{ width: '30px', textAlign: 'center', fontSize: '0.85rem', fontWeight: 700 }}>{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.product.id, item.quantity + 1)} style={{ padding: '4px 12px', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>+</button>
+                  <button onClick={() => updateQuantity(item.product.id, item.quantity + 1)} aria-label={`Sumar unidad de ${item.product.name}`} style={{ padding: '4px 12px', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>+</button>
                 </div>
 
                 {/* Subtotal */}
@@ -97,8 +99,8 @@ export const Cart: React.FC = () => {
                 </div>
 
                 {/* Remove button */}
-                <button onClick={() => removeFromCart(item.product.id)} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', transition: 'var(--transition-smooth)' }} className="trash-hover">
-                  <Trash2 size={18} />
+                <button onClick={() => removeFromCart(item.product.id)} aria-label={`Eliminar ${item.product.name} del carrito`} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', transition: 'var(--transition-smooth)' }} className="trash-hover">
+                  <Trash2 size={18} aria-hidden="true" />
                 </button>
 
               </div>
@@ -146,7 +148,7 @@ export const Cart: React.FC = () => {
                         <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <span style={{ fontWeight: 800, fontSize: '0.8rem', color: 'var(--action-yellow)' }}>${price.toLocaleString()}</span>
                           <button 
-                            onClick={() => addToCart(item, 1).then(() => alert(`¡"${item.name}" agregado al carrito!`))} 
+                            onClick={() => addToCart(item, 1).then(() => showToast(`"${item.name}" agregado al carrito`))} 
                             className="btn btn-primary" 
                             style={{ padding: '4px 8px', fontSize: '0.7rem' }}
                           >

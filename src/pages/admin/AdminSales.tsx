@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { dbService, Order, Product } from '../../services/db';
 import { Search, Eye, X, Receipt, RefreshCw, Truck, CreditCard, User, Calendar } from 'lucide-react';
 import { getProductImage } from '../Shop';
+import { useToast } from '../../context/ToastContext';
 
 export const AdminSales: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -9,6 +10,7 @@ export const AdminSales: React.FC = () => {
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { showToast } = useToast();
   
   // DATE RANGE FILTER STATE
   const [dateFilter, setDateFilter] = useState<'7' | '15' | '30' | '60' | '90' | 'custom'>('90');
@@ -100,7 +102,7 @@ export const AdminSales: React.FC = () => {
     // Refresh lists
     setOrders(updatedOrders);
     setSelectedOrder(prev => prev ? { ...prev, payment_status: statusSelectorValue } : null);
-    alert('¡Estado del pedido actualizado con éxito!');
+    showToast('Estado del pedido actualizado con éxito');
   };
 
   return (
@@ -127,7 +129,7 @@ export const AdminSales: React.FC = () => {
         <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
           <input 
             type="text" 
-            placeholder="Buscar por cliente, correo o N° de orden..." 
+            placeholder="Buscar por cliente, correo o N° de orden…" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="input"
@@ -192,7 +194,7 @@ export const AdminSales: React.FC = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando órdenes...</td>
+                <td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando órdenes…</td>
               </tr>
             ) : filteredOrders.length > 0 ? (
               filteredOrders.map(o => (

@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { dbService, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { ChevronRight, ArrowRight, CheckCircle, MessageSquare, Info, ShieldAlert, Sparkles } from 'lucide-react';
 
 export const KitDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addKitToCart, sessionToken } = useCart();
+  const { showToast } = useToast();
   const [kit, setKit] = useState<Kit | null>(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export const KitDetails: React.FC = () => {
   if (!kit) {
     return (
       <div className="container" style={{ padding: '60px 0', textAlign: 'center' }}>
-        <div style={{ color: 'var(--text-secondary)' }}>Cargando detalles del kit...</div>
+        <div style={{ color: 'var(--text-secondary)' }}>Cargando detalles del kit…</div>
       </div>
     );
   }
@@ -30,11 +32,11 @@ export const KitDetails: React.FC = () => {
   const handlePurchase = async () => {
     const isAvailable = kit.products.every(kp => (kp.product?.stock || 0) >= kp.quantity);
     if (!isAvailable) {
-      alert('Alguno de los componentes del kit no posee stock suficiente en este momento.');
+      showToast('Alguno de los componentes del kit no posee stock suficiente en este momento.', 'error');
       return;
     }
     await addKitToCart(kit);
-    alert(`¡Componentes del "${kit.name}" agregados con descuento!`);
+    showToast(`Componentes del "${kit.name}" agregados con descuento`);
     navigate('/carrito');
   };
 

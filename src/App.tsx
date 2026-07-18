@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
+import { ToastProvider } from './context/ToastContext';
 import { Layout } from './components/Layout';
 
 // Public Pages
@@ -27,6 +28,7 @@ import { AdminFinance } from './pages/admin/AdminFinance';
 
 const App: React.FC = () => {
   return (
+    <ToastProvider>
     <CartProvider>
       <BrowserRouter>
         <Routes>
@@ -66,6 +68,7 @@ const App: React.FC = () => {
         </Routes>
       </BrowserRouter>
     </CartProvider>
+    </ToastProvider>
   );
 };
 

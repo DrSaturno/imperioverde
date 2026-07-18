@@ -84,7 +84,7 @@ export const AdminCRM: React.FC = () => {
         <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
           <input 
             type="text" 
-            placeholder="Buscar por nombre, email o teléfono..." 
+            placeholder="Buscar por nombre, email o teléfono…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="input"

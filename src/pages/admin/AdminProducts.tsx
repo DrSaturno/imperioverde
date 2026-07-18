@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { dbService, Product, Kit, KitProduct } from '../../services/db';
 import { Search, Plus, Edit2, Trash2, X, AlertCircle } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
 
 export const AdminProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [kits, setKits] = useState<Kit[]>([]);
-  
+  const { showToast } = useToast();
+
   // Tab control
   const [activeTab, setActiveTab] = useState<'products' | 'kits'>('products');
   
@@ -134,7 +136,7 @@ export const AdminProducts: React.FC = () => {
     };
 
     await dbService.upsertProduct(productPayload);
-    alert(editingProduct ? '¡Producto actualizado con éxito!' : '¡Producto creado con éxito!');
+    showToast(editingProduct ? 'Producto actualizado con éxito' : 'Producto creado con éxito');
     setProductModalOpen(false);
     fetchData();
   };
@@ -183,7 +185,7 @@ export const AdminProducts: React.FC = () => {
   const handleKitSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!kitName || !kitPrice || kitSelectedProducts.length === 0) {
-      alert('Por favor completa los datos mínimos e ingresa al menos un componente.');
+      showToast('Por favor completa los datos mínimos e ingresa al menos un componente.', 'error');
       return;
     }
 
@@ -202,7 +204,7 @@ export const AdminProducts: React.FC = () => {
     };
 
     await dbService.upsertKit(kitPayload);
-    alert('¡Kit creado y configurado con éxito!');
+    showToast('Kit creado y configurado con éxito');
     setKitModalOpen(false);
     fetchData();
   };
@@ -266,7 +268,7 @@ export const AdminProducts: React.FC = () => {
           <div style={{ position: 'relative', maxWidth: '400px' }}>
             <input 
               type="text" 
-              placeholder="Buscar producto por nombre, marca o categoría..." 
+              placeholder="Buscar producto por nombre, marca o categoría…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="input"
@@ -305,8 +307,8 @@ export const AdminProducts: React.FC = () => {
                     </td>
                     <td style={{ padding: '14px', color: p.stock > 0 ? 'var(--accent-neon)' : '#ef5350' }}>{p.stock}</td>
                     <td style={{ padding: '14px', textAlign: 'right' }}>
-                      <button onClick={() => openEditProductModal(p)} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', marginRight: '12px', cursor: 'pointer' }}><Edit2 size={14} /></button>
-                      <button onClick={() => handleDeleteProduct(p.id)} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}><Trash2 size={14} /></button>
+                      <button onClick={() => openEditProductModal(p)} aria-label={`Editar ${p.name}`} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', marginRight: '12px', cursor: 'pointer' }}><Edit2 size={14} aria-hidden="true" /></button>
+                      <button onClick={() => handleDeleteProduct(p.id)} aria-label={`Eliminar ${p.name}`} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}><Trash2 size={14} aria-hidden="true" /></button>
                     </td>
                   </tr>
                 ))}
@@ -324,7 +326,7 @@ export const AdminProducts: React.FC = () => {
             <div key={k.id} className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', borderTop: '4px solid var(--action-yellow)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span className="badge badge-yellow">Ahorro: {k.discount_percentage}%</span>
-                <button onClick={() => handleDeleteKit(k.id)} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                <button onClick={() => handleDeleteKit(k.id)} aria-label={`Eliminar kit ${k.name}`} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}><Trash2 size={16} aria-hidden="true" /></button>
               </div>
               
               <div>
@@ -402,7 +404,7 @@ export const AdminProducts: React.FC = () => {
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Marca *</span>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <select value={prodBrand} onChange={(e) => setProdBrand(e.target.value)} className="input" style={{ flex: 1 }}>
-                    <option value="">Selecciona...</option>
+                    <option value="">Selecciona…</option>
                     {brands.map(b => <option key={b} value={b}>{b}</option>)}
                   </select>
                   <button type="button" onClick={handleAddNewBrand} className="btn btn-outline" style={{ padding: '8px 12px', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>+ Nueva</button>
@@ -495,7 +497,7 @@ export const AdminProducts: React.FC = () => {
                   className="input"
                   style={{ flex: 3 }}
                 >
-                  <option value="">Selecciona un producto del catálogo...</option>
+                  <option value="">Selecciona un producto del catálogo…</option>
                   {products.map(p => (
                     <option key={p.id} value={p.id}>{p.name} ({p.brand})</option>
                   ))}

@@ -76,9 +76,10 @@ export const Header: React.FC = () => {
           {/* Buscador */}
           <div style={{ flex: 1, maxWidth: '400px', position: 'relative' }} className="desktop-search">
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative' }}>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="¿Qué necesitás para tu cultivo?"
+                aria-label="Buscar productos"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -88,8 +89,8 @@ export const Header: React.FC = () => {
                 className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer' }}>
-                <Search size={18} />
+              <button type="submit" aria-label="Buscar" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer' }}>
+                <Search size={18} aria-hidden="true" />
               </button>
             </form>
 
@@ -133,8 +134,8 @@ export const Header: React.FC = () => {
 
           {/* Right Icons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/carrito" className="header-cart-link" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px' }}>
-              <ShoppingCart size={22} />
+            <Link to="/carrito" aria-label={`Carrito de compras${totalItems > 0 ? `, ${totalItems} producto${totalItems > 1 ? 's' : ''}` : ''}`} className="header-cart-link" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px' }}>
+              <ShoppingCart size={22} aria-hidden="true" />
               {totalItems > 0 && (
                 <span style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'var(--accent-neon)', color: '#030a06', fontSize: '0.75rem', fontWeight: 700, borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {totalItems}
@@ -143,12 +144,14 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* Mobile Menu Toggle */}
-            <button 
-              onClick={() => setMenuOpen(!menuOpen)} 
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
               className="mobile-toggle"
+              aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={menuOpen}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
             >
-              {menuOpen ? <X size={26} /> : <Menu size={26} />}
+              {menuOpen ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -159,16 +162,17 @@ export const Header: React.FC = () => {
             
             {/* Mobile Search */}
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative', marginBottom: '10px' }}>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="¿Qué necesitás para tu cultivo?"
+                aria-label="Buscar productos"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none' }}>
-                <Search size={18} />
+              <button type="submit" aria-label="Buscar" className="header-search-button" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none' }}>
+                <Search size={18} aria-hidden="true" />
               </button>
             </form>
 

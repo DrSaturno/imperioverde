@@ -239,7 +239,7 @@ export const AdminFinance: React.FC = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando datos...</td>
+                <td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando datos…</td>
               </tr>
             ) : categoryBreakdownTable.length > 0 ? (
               categoryBreakdownTable.map((cat, idx) => (

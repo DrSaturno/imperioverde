@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { dbService, Coupon, Customer } from '../../services/db';
+import { useToast } from '../../context/ToastContext';
 import { Megaphone, Plus, Trash2, Check, X, Users, Mail, Phone, Calendar, RefreshCw } from 'lucide-react';
 
 export const AdminMarketing: React.FC = () => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   // Form Coupon State
   const [couponCode, setCouponCode] = useState('');
@@ -28,13 +30,13 @@ export const AdminMarketing: React.FC = () => {
   const handleCreateCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!couponCode.trim() || !couponDiscount) {
-      alert('Por favor, completa los campos del cupón.');
+      showToast('Por favor, completa los campos del cupón.', 'error');
       return;
     }
 
     const discountNum = parseFloat(couponDiscount);
     if (isNaN(discountNum) || discountNum <= 0 || discountNum > 100) {
-      alert('El porcentaje de descuento debe estar entre 1 y 100.');
+      showToast('El porcentaje de descuento debe estar entre 1 y 100.', 'error');
       return;
     }
 
@@ -49,7 +51,7 @@ export const AdminMarketing: React.FC = () => {
     setCouponCode('');
     setCouponDiscount('');
     setCouponActive(true);
-    alert('¡Cupón creado/actualizado con éxito!');
+    showToast('Cupón creado/actualizado con éxito');
   };
 
   const handleDeleteCoupon = async (code: string) => {
@@ -162,8 +164,8 @@ export const AdminMarketing: React.FC = () => {
                           )}
                         </td>
                         <td style={{ padding: '10px 16px', textAlign: 'right' }}>
-                          <button onClick={() => handleDeleteCoupon(c.code)} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}>
-                            <Trash2 size={14} />
+                          <button onClick={() => handleDeleteCoupon(c.code)} aria-label={`Eliminar cupón ${c.code}`} style={{ background: 'none', border: 'none', color: '#ef5350', cursor: 'pointer' }}>
+                            <Trash2 size={14} aria-hidden="true" />
                           </button>
                         </td>
                       </tr>
@@ -202,7 +204,7 @@ export const AdminMarketing: React.FC = () => {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={4} style={{ padding: '30px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando suscriptores...</td>
+                    <td colSpan={4} style={{ padding: '30px', textAlign: 'center', color: 'var(--text-muted)' }}>Cargando suscriptores…</td>
                   </tr>
                 ) : customers.length > 0 ? (
                   customers.map(cust => (

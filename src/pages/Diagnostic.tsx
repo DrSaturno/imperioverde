@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import { ChevronRight, ArrowRight, ShieldCheck, AlertCircle, Compass, HelpCircle, Activity } from 'lucide-react';
 
 interface ProblemDetail {
@@ -100,6 +101,7 @@ export const Diagnostic: React.FC = () => {
   const { problema } = useParams<{ problema: string }>();
   const navigate = useNavigate();
   const { addToCart, sessionToken } = useCart();
+  const { showToast } = useToast();
   
   const [problem, setProblem] = useState<ProblemDetail | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
@@ -140,7 +142,7 @@ export const Diagnostic: React.FC = () => {
 
   const handleProductAdd = async (product: Product) => {
     await addToCart(product, 1);
-    alert(`¡"${product.name}" agregado al carrito!`);
+    showToast(`"${product.name}" agregado al carrito`);
   };
 
   const getWhatsAppLink = () => {
@@ -166,11 +168,11 @@ export const Diagnostic: React.FC = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', maxWidth: '900px', margin: '0 auto' }}>
           {Object.entries(PROBLEMS).map(([slug, item]) => (
-            <div 
-              key={slug} 
-              onClick={() => navigate(`/resolver/${slug}`)}
-              className="glass-card" 
-              style={{ display: 'flex', flexDirection: 'column', gap: '14px', cursor: 'pointer' }}
+            <Link
+              key={slug}
+              to={`/resolver/${slug}`}
+              className="glass-card"
+              style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
@@ -178,7 +180,7 @@ export const Diagnostic: React.FC = () => {
               </div>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{item.intro}</p>
               <span style={{ fontSize: '0.85rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: 'auto', fontWeight: 600 }}>Ver Diagnóstico <ArrowRight size={12} /></span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
