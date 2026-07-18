@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer style={{ backgroundColor: '#050d09', borderTop: '1px solid var(--border-glass)', padding: '60px 0 20px', marginTop: '60px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+    <footer className="site-footer" style={{ backgroundColor: '#ecd444', borderTop: '1px solid rgba(79,20,95,0.35)', padding: '60px 0 20px', marginTop: '60px', fontSize: '0.9rem', color: '#50145f' }}>
       <div className="container">
         
         {/* Core grid */}
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer" 
                 aria-label="Instagram de Imperio Verde"
                 title="Instagram"
-                style={{ padding: '8px', backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '50%', color: 'var(--text-primary)' }}
+                style={{ padding: '8px', backgroundColor: 'rgba(79,20,95,0.1)', borderRadius: '50%', color: '#50145f' }}
                 onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'instagram' })}
               >
                 <Instagram size={18} />
@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer" 
                 aria-label="WhatsApp de Imperio Verde"
                 title="WhatsApp"
-                style={{ padding: '8px', backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '50%', color: 'var(--text-primary)' }}
+                style={{ padding: '8px', backgroundColor: 'rgba(79,20,95,0.1)', borderRadius: '50%', color: '#50145f' }}
                 onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'whatsapp' })}
               >
                 <MessageCircle size={18} />
@@ -91,25 +91,25 @@ export const Footer: React.FC = () => {
 
           {/* Contact Details */}
           <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Contacto y Local
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: 'var(--accent-neon)' }}></span>
+              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.85rem' }}>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <MapPin size={18} style={{ color: 'var(--accent-neon)', flexShrink: 0, marginTop: '2px' }} />
+                <MapPin size={18} style={{ color: '#5d176e', flexShrink: 0, marginTop: '2px' }} />
                 <span>Avenida Triunvirato 4135, Local 5 y 7, CABA, Argentina</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Phone size={16} style={{ color: 'var(--accent-neon)', flexShrink: 0 }} />
+                <Phone size={16} style={{ color: '#5d176e', flexShrink: 0 }} />
                 <a href="tel:+541153841079" className="footer-link">11 5384-1079</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Mail size={16} style={{ color: 'var(--accent-neon)', flexShrink: 0 }} />
+                <Mail size={16} style={{ color: '#5d176e', flexShrink: 0 }} />
                 <a href="mailto:imperioverdegrowshop@gmail.com" className="footer-link">imperioverdegrowshop@gmail.com</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <Clock size={18} style={{ color: 'var(--accent-neon)', flexShrink: 0, marginTop: '2px' }} />
+                <Clock size={18} style={{ color: '#5d176e', flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <strong>Lunes a Viernes:</strong> 13:00 a 20:00 hs<br />
                   <strong>Sábados:</strong> 13:00 a 18:00 hs
@@ -120,9 +120,9 @@ export const Footer: React.FC = () => {
 
           {/* Policies & Links */}
           <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Ayuda al Cultivador
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: 'var(--accent-neon)' }}></span>
+              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
               <li><Link to="/productos" className="footer-link">Ver Catálogo de Insumos</Link></li>
@@ -130,21 +130,21 @@ export const Footer: React.FC = () => {
               <li><Link to="/hidroponia" className="footer-link">Sistemas y Guías Hidropónicas</Link></li>
               <li><Link to="/resolver" className="footer-link">Diagnóstico de Plagas y Clima</Link></li>
               <li><Link to="/guias" className="footer-link">Blog & Consejos de Cultivo</Link></li>
-              <li><Link to="/admin" className="footer-link" style={{ color: 'var(--text-muted)' }}>Panel Administrador</Link></li>
+              <li><Link to="/admin" className="footer-link" style={{ color: 'rgba(79,20,95,0.68)' }}>Panel Administrador</Link></li>
             </ul>
           </div>
 
           {/* Newsletter Form */}
           <div>
-            <h4 style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
+            <h4 style={{ fontFamily: 'var(--font-title)', color: '#3b0c47', fontSize: '1.05rem', marginBottom: '18px', position: 'relative' }}>
               Base de Datos Cultivadores
-              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: 'var(--accent-neon)' }}></span>
+              <span style={{ content: '""', position: 'absolute', bottom: '-6px', left: 0, width: '30px', height: '2px', backgroundColor: '#5d176e' }}></span>
             </h4>
             <p style={{ fontSize: '0.8rem', lineHeight: 1.4, marginBottom: '12px' }}>
               Sumate para recibir guías de cultivo en PDF, checklists de mantenimiento y ofertas de reposición exclusivas.
             </p>
             {submitted ? (
-              <div style={{ backgroundColor: 'rgba(0,230,118,0.1)', border: '1px solid rgba(0,230,118,0.2)', padding: '12px', borderRadius: '4px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--accent-neon)' }}>
+              <div style={{ backgroundColor: 'rgba(79,20,95,0.1)', border: '1px solid rgba(79,20,95,0.25)', padding: '12px', borderRadius: '4px', textAlign: 'center', fontSize: '0.8rem', color: '#50145f' }}>
                 <ShieldCheck size={18} style={{ display: 'block', margin: '0 auto 4px' }} />
                 ¡Te sumamos! Revisá tu correo para el PDF.
               </div>
@@ -158,7 +158,7 @@ export const Footer: React.FC = () => {
                     setName(e.target.value);
                     if (formError) setFormError('');
                   }}
-                  className="input" 
+                  className="input footer-input"
                   style={{ padding: '8px 12px', fontSize: '0.8rem' }}
                   autoComplete="name"
                   minLength={2}
@@ -175,7 +175,7 @@ export const Footer: React.FC = () => {
                       setEmail(e.target.value);
                       if (formError) setFormError('');
                     }}
-                    className="input" 
+                    className="input footer-input"
                     style={{ padding: '8px 12px', fontSize: '0.8rem' }}
                     autoComplete="email"
                     maxLength={254}
@@ -198,11 +198,11 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Divider */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', padding: '20px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '0.75rem' }}>
+        <div style={{ borderTop: '1px solid rgba(79,20,95,0.18)', padding: '20px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '0.75rem' }}>
           <div>
             © {new Date().getFullYear()} Imperio Verde Grow Shop. Todos los derechos reservados.
           </div>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'rgba(79,20,95,0.72)' }}>
             <span>💳 Mercado Pago</span>
             <span>🚛 Correo Argentino / Andreani</span>
             <span>🏠 Retiro Local</span>
@@ -215,8 +215,20 @@ export const Footer: React.FC = () => {
           transition: var(--transition-smooth);
         }
         .footer-link:hover {
-          color: var(--accent-neon);
+          color: #2f0839;
           padding-left: 4px;
+        }
+        .footer-input {
+          background-color: rgba(255,255,255,0.42);
+          border-color: rgba(79,20,95,0.38);
+          color: #3b0c47;
+        }
+        .footer-input::placeholder {
+          color: rgba(79,20,95,0.64);
+        }
+        .footer-input:focus {
+          border-color: #5d176e;
+          box-shadow: 0 0 0 3px rgba(93,23,110,0.14);
         }
       `}</style>
     </footer>

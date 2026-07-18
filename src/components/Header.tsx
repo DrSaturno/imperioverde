@@ -65,7 +65,7 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Main Header */}
-      <header style={{ backgroundColor: 'rgba(10, 27, 18, 0.9)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 90, borderBottom: '1px solid var(--border-glass)', padding: '16px 0' }}>
+      <header style={{ backgroundColor: '#ecd444', position: 'sticky', top: 0, zIndex: 90, borderBottom: '1px solid rgba(79,20,95,0.35)', padding: '16px 0', boxShadow: '0 6px 24px rgba(0,0,0,0.18)' }}>
         <div className="container header-main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
           
           {/* Logo */}
@@ -85,10 +85,10 @@ export const Header: React.FC = () => {
                   setShowResults(true);
                 }}
                 onFocus={() => setShowResults(true)}
-                className="input" 
+                className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--accent-neon)', cursor: 'pointer' }}>
+              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#50145f', cursor: 'pointer' }}>
                 <Search size={18} />
               </button>
             </form>
@@ -133,7 +133,7 @@ export const Header: React.FC = () => {
 
           {/* Right Icons */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/carrito" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px', color: 'var(--text-primary)' }}>
+            <Link to="/carrito" onClick={() => dbService.logEvent(sessionToken, 'nav_click', { to: '/carrito' })} style={{ position: 'relative', padding: '8px', color: '#50145f' }}>
               <ShoppingCart size={22} />
               {totalItems > 0 && (
                 <span style={{ position: 'absolute', top: 0, right: 0, backgroundColor: 'var(--accent-neon)', color: '#030a06', fontSize: '0.75rem', fontWeight: 700, borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -146,7 +146,7 @@ export const Header: React.FC = () => {
             <button 
               onClick={() => setMenuOpen(!menuOpen)} 
               className="mobile-toggle"
-              style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', padding: '4px' }}
+              style={{ background: 'none', border: 'none', color: '#50145f', cursor: 'pointer', padding: '4px' }}
             >
               {menuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
@@ -155,7 +155,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="mobile-nav" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-glass)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', fontFamily: 'var(--font-title)', fontWeight: 600, position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 8px 24px rgba(0,0,0,0.5)', zIndex: 99 }}>
+          <div className="mobile-nav" style={{ backgroundColor: '#ecd444', borderTop: '1px solid rgba(79,20,95,0.3)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', fontFamily: 'var(--font-title)', fontWeight: 600, position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 8px 24px rgba(0,0,0,0.35)', zIndex: 99 }}>
             
             {/* Mobile Search */}
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative', marginBottom: '10px' }}>
@@ -164,10 +164,10 @@ export const Header: React.FC = () => {
                 placeholder="¿Qué necesitás para tu cultivo?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="input" 
+                className="input header-search-input"
                 style={{ paddingRight: '45px', fontSize: '0.9rem' }}
               />
-              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--accent-neon)' }}>
+              <button type="submit" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#50145f' }}>
                 <Search size={18} />
               </button>
             </form>
@@ -178,8 +178,8 @@ export const Header: React.FC = () => {
             <NavLink to="/resolver" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/resolver', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><HelpCircle size={18} /> Resolver Problemas</NavLink>
             <NavLink to="/guias" onClick={() => { setMenuOpen(false); dbService.logEvent(sessionToken, 'nav_click', { to: '/guias', device: 'mobile' }); }} className={({ isActive }) => `mobile-menu-link header-nav-link${isActive ? ' is-active' : ''}`}><BookOpen size={18} /> Guías y Consejos</NavLink>
             
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>¿Necesitás ayuda con tu compra?</span>
+            <div style={{ borderTop: '1px solid rgba(79,20,95,0.22)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.8rem', color: '#50145f' }}>¿Necesitás ayuda con tu compra?</span>
               <a 
                 href="https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estoy%20navegando%20la%20tienda%20mobile%20y%20tengo%20una%20consulta."
                 target="_blank" 
@@ -208,11 +208,23 @@ export const Header: React.FC = () => {
           object-fit: contain;
         }
         .header-nav-link {
-          color: var(--action-yellow);
+          color: #5d176e;
         }
         .header-nav-link:hover,
         .header-nav-link.is-active {
-          color: var(--accent-violet);
+          color: #2f0839;
+        }
+        .header-search-input {
+          background-color: rgba(255,255,255,0.38);
+          border-color: rgba(79,20,95,0.45);
+          color: #3b0c47;
+        }
+        .header-search-input::placeholder {
+          color: rgba(79,20,95,0.72);
+        }
+        .header-search-input:focus {
+          border-color: #5d176e;
+          box-shadow: 0 0 0 3px rgba(93,23,110,0.16);
         }
         .mobile-menu-link {
           display: flex;
