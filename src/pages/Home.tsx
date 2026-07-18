@@ -279,13 +279,10 @@ export const Home: React.FC = () => {
       {/* 5. SECCIÓN DESTACADA: HIDROPONÍA */}
       <section className="container">
         <div 
-          className="glass-card violet" 
+          className="glass-card violet home-hydro-banner" 
           style={{ 
             padding: '60px 40px', 
             borderRadius: 'var(--radius-lg)', 
-            backgroundImage: 'linear-gradient(135deg, rgba(20, 10, 30, 0.94) 0%, rgba(142, 36, 170, 0.35) 100%), url("https://images.unsplash.com/photo-1584473457406-6240486418e9?q=80&w=1600&auto=format&fit=crop")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             border: '1px solid rgba(142, 36, 170, 0.4)',
             display: 'grid',
             gridTemplateColumns: '1.2fr 0.8fr',
@@ -401,7 +398,7 @@ export const Home: React.FC = () => {
 
       {/* 7. WHATSAPP ADVISING CTA */}
       <section className="container">
-        <div className="glass-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '30px', padding: '40px', borderLeft: '6px solid var(--accent-neon)' }}>
+        <div className="glass-card home-advice-banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '30px', padding: '40px', borderLeft: '6px solid var(--accent-neon)' }}>
           <div style={{ maxWidth: '650px' }}>
             <h2 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-title)', marginBottom: '8px' }}>¿No sabés qué elegir para empezar a cultivar?</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>

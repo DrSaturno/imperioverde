@@ -130,6 +130,43 @@ button, input, select, textarea {
   box-shadow: var(--shadow-violet);
 }
 
+.home-hydro-banner {
+  background-image:
+    linear-gradient(90deg, rgba(13, 6, 22, 0.98) 0%, rgba(18, 8, 28, 0.92) 42%, rgba(35, 11, 48, 0.42) 72%, rgba(18, 6, 27, 0.26) 100%),
+    url('/home/hydroponics-banner-v2.webp');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.home-advice-banner {
+  background-image:
+    linear-gradient(90deg, rgba(8, 28, 18, 0.99) 0%, rgba(8, 28, 18, 0.96) 48%, rgba(8, 28, 18, 0.63) 70%, rgba(8, 28, 18, 0.28) 100%),
+    url('/home/technical-advice-banner-v2.webp');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .home-hydro-banner,
+  .home-advice-banner {
+    background-position: 66% center;
+  }
+
+  .home-hydro-banner {
+    background-image:
+      linear-gradient(180deg, rgba(13, 6, 22, 0.94) 0%, rgba(13, 6, 22, 0.92) 68%, rgba(25, 8, 35, 0.82) 100%),
+      url('/home/hydroponics-banner-v2.webp');
+  }
+
+  .home-advice-banner {
+    background-image:
+      linear-gradient(180deg, rgba(8, 28, 18, 0.94) 0%, rgba(8, 28, 18, 0.91) 72%, rgba(8, 28, 18, 0.78) 100%),
+      url('/home/technical-advice-banner-v2.webp');
+  }
+}
+
 /* Custom Buttons & Inputs */
 .btn {
   display: inline-flex;
