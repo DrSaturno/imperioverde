@@ -71,6 +71,11 @@ export const ProductDetails: React.FC = () => {
   };
 
   const priceToPay = product.promotional_price || product.price;
+  const productImage = getProductImage(product);
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = '/fondoletras.png';
+  };
 
   return (
     <div className="container">
@@ -91,28 +96,24 @@ export const ProductDetails: React.FC = () => {
         
         {/* Left Column: Image Gallery */}
         <div>
-          <div style={{ backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-lg)', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-glass)', fontSize: '5rem', marginBottom: '16px' }}>
-            {product.category === 'Fertilizantes' && '🧪'}
-            {product.category === 'Ventilación y Clima' && '💨'}
-            {product.category === 'Medición' && '📊'}
-            {product.category === 'Sustratos y Medios' && '🪨'}
-            {product.category === 'Parafernalia' && '🦁'}
-            {product.category === 'Macetas' && '🪴'}
-            {product.category === 'Riego' && '💧'}
-            {product.category === 'Control de Plagas' && '🐛'}
-            {product.category === 'Jardinería' && '🛠️'}
-            {product.category === 'Cosecha y Secado' && '✂️'}
-            {product.category === 'Iluminación' && '💡'}
-            {product.category === 'Accesorios' && '⚙️'}
+          <div className="product-detail-image-container">
+            <img
+              src={productImage}
+              alt={product.name}
+              className="product-detail-image"
+              onError={handleImageError}
+            />
           </div>
           
           {/* Thumbnails */}
           <div style={{ display: 'flex', gap: '10px' }}>
-            {[1, 2, 3].map(i => (
-              <div key={i} style={{ width: '80px', height: '80px', backgroundColor: 'rgba(0,0,0,0.1)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-glass)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', opacity: 0.5 }}>
-                🔍
-              </div>
-            ))}
+            <div className="product-detail-thumbnail">
+              <img
+                src={productImage}
+                alt={`Vista previa de ${product.name}`}
+                onError={handleImageError}
+              />
+            </div>
           </div>
         </div>
 
@@ -424,6 +425,10 @@ const mobileDetailsStyles = (
       .product-split {
         grid-template-columns: 1fr !important;
         gap: 30px !important;
+      }
+      .product-detail-image-container {
+        height: 320px;
+        padding: 16px;
       }
       .mobile-only-cta {
         display: flex !important;
