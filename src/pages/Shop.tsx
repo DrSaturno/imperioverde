@@ -335,7 +335,7 @@ export const Shop: React.FC = () => {
               <div style={{ display: 'flex', gap: '12px' }}>
                 <button onClick={clearAllFilters} className="btn btn-outline">Ver Todo el Catálogo</button>
                 <a 
-                  href={`https://wa.me/5491123456789?text=Hola%20Imperio%20Verde%2C%20estaba%20buscando%20"${searchTerm || 'productos'}"%20y%20no%20lo%20encontré%20en%20la%20web.%20¿Me%20ayudan?`}
+                  href={`https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estaba%20buscando%20"${searchTerm || 'productos'}"%20y%20no%20lo%20encontré%20en%20la%20web.%20¿Me%20ayudan?`}
                   target="_blank" 
                   rel="noreferrer" 
                   className="btn btn-primary"

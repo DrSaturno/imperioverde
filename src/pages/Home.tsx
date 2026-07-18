@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
     } else if (context === 'hidro') {
       msg = 'Hola Imperio Verde, quiero empezar en hidroponía y necesito que me recomienden un sistema.';
     }
-    return `https://wa.me/5491123456789?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/5491153841079?text=${encodeURIComponent(msg)}`;
   };
 
   return (

@@ -2,30 +2,52 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { dbService } from '../services/db';
 import { useCart } from '../context/CartContext';
-import { Phone, MapPin, Clock, Send, Instagram, Facebook, ShieldCheck } from 'lucide-react';
+import { Phone, MapPin, Clock, Mail, Send, Instagram, MessageCircle, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { sessionToken } = useCart();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !name.trim()) return;
+    const cleanName = name.trim().replace(/\s+/g, ' ');
+    const cleanEmail = email.trim().toLowerCase();
+    const namePattern = /^[\p{L}\s'.-]+$/u;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    // Save lead details into CRM!
-    await dbService.addCustomer({
-      email,
-      full_name: name,
-      interests: ['boletin_novedades'],
-      is_subscribed: true
-    });
+    if (cleanName.length < 2 || !namePattern.test(cleanName)) {
+      setFormError('Ingresá un nombre válido de al menos 2 caracteres.');
+      return;
+    }
+    if (!emailPattern.test(cleanEmail)) {
+      setFormError('Ingresá un correo electrónico válido.');
+      return;
+    }
 
-    dbService.logEvent(sessionToken, 'newsletter_subscribe', { email, name });
-    setSubmitted(true);
-    setEmail('');
-    setName('');
+    setFormError('');
+    setIsSubmitting(true);
+
+    try {
+      await dbService.addCustomer({
+        email: cleanEmail,
+        full_name: cleanName,
+        interests: ['boletin_novedades'],
+        is_subscribed: true
+      });
+
+      await dbService.logEvent(sessionToken, 'newsletter_subscribe', { email: cleanEmail, name: cleanName });
+      setSubmitted(true);
+      setEmail('');
+      setName('');
+    } catch {
+      setFormError('No pudimos registrarte. Intentá nuevamente en unos minutos.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,31 +59,32 @@ export const Footer: React.FC = () => {
           
           {/* Logo & Intro */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <img src="/Imperio Verde.png" alt="Imperio Verde Logo" style={{ height: '35px', objectFit: 'contain' }} />
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: '1.1rem', fontWeight: 800, color: 'var(--accent-neon)' }}>IMPERIO VERDE</span>
-            </div>
+            <img src="/logo-header.png" alt="Imperio Verde Growshop" style={{ display: 'block', width: '190px', maxWidth: '100%', height: 'auto', objectFit: 'contain', marginBottom: '16px' }} />
             <p style={{ fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '20px' }}>
               No vendemos solo insumos: te acompañamos con asesoramiento técnico y soluciones completas para que logres la máxima producción en tu cultivo.
             </p>
             <div style={{ display: 'flex', gap: '12px' }}>
               <a 
-                href="https://instagram.com/imperioverde" 
+                href="https://www.instagram.com/imperioverdegrowshop/"
                 target="_blank" 
                 rel="noreferrer" 
+                aria-label="Instagram de Imperio Verde"
+                title="Instagram"
                 style={{ padding: '8px', backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '50%', color: 'var(--text-primary)' }}
                 onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'instagram' })}
               >
                 <Instagram size={18} />
               </a>
               <a 
-                href="https://facebook.com/imperioverde" 
+                href="https://wa.me/5491153841079"
                 target="_blank" 
                 rel="noreferrer" 
+                aria-label="WhatsApp de Imperio Verde"
+                title="WhatsApp"
                 style={{ padding: '8px', backgroundColor: 'rgba(255,255,255,0.03)', borderRadius: '50%', color: 'var(--text-primary)' }}
-                onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'facebook' })}
+                onClick={() => dbService.logEvent(sessionToken, 'social_click', { network: 'whatsapp' })}
               >
-                <Facebook size={18} />
+                <MessageCircle size={18} />
               </a>
             </div>
           </div>
@@ -75,17 +98,21 @@ export const Footer: React.FC = () => {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.85rem' }}>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                 <MapPin size={18} style={{ color: 'var(--accent-neon)', flexShrink: 0, marginTop: '2px' }} />
-                <span>Av. de las Raíces 420, CABA (Grow Sucursal)</span>
+                <span>Avenida Triunvirato 4135, Local 5 y 7, CABA, Argentina</span>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Phone size={16} style={{ color: 'var(--accent-neon)', flexShrink: 0 }} />
-                <span>+54 9 11 2345-6789</span>
+                <a href="tel:+541153841079" className="footer-link">11 5384-1079</a>
+              </li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Mail size={16} style={{ color: 'var(--accent-neon)', flexShrink: 0 }} />
+                <a href="mailto:imperioverdegrowshop@gmail.com" className="footer-link">imperioverdegrowshop@gmail.com</a>
               </li>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                 <Clock size={18} style={{ color: 'var(--accent-neon)', flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <strong>Lunes a Viernes:</strong> 10:00 a 19:00 hs<br />
-                  <strong>Sábados:</strong> 10:00 a 14:00 hs
+                  <strong>Lunes a Viernes:</strong> 13:00 a 20:00 hs<br />
+                  <strong>Sábados:</strong> 13:00 a 18:00 hs
                 </div>
               </li>
             </ul>
@@ -127,9 +154,16 @@ export const Footer: React.FC = () => {
                   type="text" 
                   placeholder="Tu Nombre" 
                   value={name} 
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (formError) setFormError('');
+                  }}
                   className="input" 
                   style={{ padding: '8px 12px', fontSize: '0.8rem' }}
+                  autoComplete="name"
+                  minLength={2}
+                  maxLength={60}
+                  aria-invalid={Boolean(formError)}
                   required
                 />
                 <div style={{ display: 'flex', gap: '4px' }}>
@@ -137,15 +171,26 @@ export const Footer: React.FC = () => {
                     type="email" 
                     placeholder="tuemail@correo.com" 
                     value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (formError) setFormError('');
+                    }}
                     className="input" 
                     style={{ padding: '8px 12px', fontSize: '0.8rem' }}
+                    autoComplete="email"
+                    maxLength={254}
+                    aria-invalid={Boolean(formError)}
                     required
                   />
-                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)' }}>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)' }} disabled={isSubmitting} aria-label="Sumarme a la base de datos">
                     <Send size={14} />
                   </button>
                 </div>
+                {formError && (
+                  <div role="alert" style={{ color: '#ff8a80', fontSize: '0.75rem', lineHeight: 1.35 }}>
+                    {formError}
+                  </div>
+                )}
               </form>
             )}
           </div>

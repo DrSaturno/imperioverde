@@ -67,7 +67,7 @@ export const ProductDetails: React.FC = () => {
 
   const getWhatsAppMessage = () => {
     const msg = `Hola Imperio Verde, estoy viendo el producto "${product.name}" (${product.brand}) en su web y me gustaría consultar sobre su aplicación o compatibilidad.`;
-    return `https://wa.me/5491123456789?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/5491153841079?text=${encodeURIComponent(msg)}`;
   };
 
   const priceToPay = product.promotional_price || product.price;
@@ -206,7 +206,7 @@ export const ProductDetails: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Escribinos para avisarte en cuanto ingrese stock del fabricante.</span>
               <a 
-                href={`https://wa.me/5491123456789?text=Hola%20Imperio%20Verde%2C%20estoy%20interesado%20en%20el%20producto%20"${product.name}"%20que%20se%20encuentra%20agotado.%20¿Cuándo%20vuelve%20a%20entrar?`}
+                href={`https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estoy%20interesado%20en%20el%20producto%20"${product.name}"%20que%20se%20encuentra%20agotado.%20¿Cuándo%20vuelve%20a%20entrar?`}
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-outline"

@@ -145,7 +145,7 @@ export const Diagnostic: React.FC = () => {
 
   const getWhatsAppLink = () => {
     const msg = `Hola Imperio Verde, tengo problemas en mi cultivo con: "${problem?.title}". ¿Me recomiendan una solución?`;
-    return `https://wa.me/5491123456789?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/5491153841079?text=${encodeURIComponent(msg)}`;
   };
 
   // 1. Index Landing list if no param is set

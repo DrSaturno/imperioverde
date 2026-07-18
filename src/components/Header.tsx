@@ -181,7 +181,7 @@ export const Header: React.FC = () => {
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px', marginTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>¿Necesitás ayuda con tu compra?</span>
               <a 
-                href="https://wa.me/5491123456789?text=Hola%20Imperio%20Verde%2C%20estoy%20navegando%20la%20tienda%20mobile%20y%20tengo%20una%20consulta." 
+                href="https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estoy%20navegando%20la%20tienda%20mobile%20y%20tengo%20una%20consulta."
                 target="_blank" 
                 rel="noreferrer"
                 style={{ backgroundColor: '#25D366', color: '#fff', fontSize: '0.8rem', padding: '6px 12px', borderRadius: '4px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}

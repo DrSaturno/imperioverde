@@ -84,7 +84,7 @@ export const Checkout: React.FC = () => {
   // SUCCESS VIRTUAL STATE
   if (orderSuccess) {
     const waMessage = `Hola Imperio Verde, completé mi pedido en la web con código: ${orderSuccess.id}. Quería coordinar los detalles de entrega/retiro.`;
-    const waLink = `https://wa.me/5491123456789?text=${encodeURIComponent(waMessage)}`;
+    const waLink = `https://wa.me/5491153841079?text=${encodeURIComponent(waMessage)}`;
 
     return (
       <div className="container" style={{ padding: '60px 0', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
@@ -99,7 +99,7 @@ export const Checkout: React.FC = () => {
             <div style={{ marginBottom: '8px' }}><strong>Código de Pedido:</strong> {orderSuccess.id}</div>
             <div style={{ marginBottom: '8px' }}><strong>Cliente:</strong> {orderSuccess.customer_name} ({orderSuccess.customer_email})</div>
             <div style={{ marginBottom: '8px' }}><strong>Monto Total:</strong> ${orderSuccess.total_amount.toLocaleString()}</div>
-            <div style={{ marginBottom: '8px' }}><strong>Método de Entrega:</strong> {orderSuccess.shipping_method === 'pickup' ? 'Retiro en Grow Sucursal (Av. de las Raíces 420)' : `Envío a domicilio: ${orderSuccess.shipping_address}`}</div>
+            <div style={{ marginBottom: '8px' }}><strong>Método de Entrega:</strong> {orderSuccess.shipping_method === 'pickup' ? 'Retiro en Grow Sucursal (Avenida Triunvirato 4135, Local 5 y 7)' : `Envío a domicilio: ${orderSuccess.shipping_address}`}</div>
             <div><strong>Estado de Pago:</strong> Aprobado (Simulado)</div>
           </div>
 
@@ -153,7 +153,7 @@ export const Checkout: React.FC = () => {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Teléfono Celular *</span>
-                  <input type="tel" placeholder="1123456789" value={phone} onChange={(e) => handleContactChange('phone', e.target.value)} className="input" required />
+                  <input type="tel" placeholder="1153841079" value={phone} onChange={(e) => handleContactChange('phone', e.target.value)} className="input" required />
                 </div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -170,7 +170,7 @@ export const Checkout: React.FC = () => {
                   <input type="radio" name="shipping" checked={shippingMethod === 'pickup'} onChange={() => setShippingMethod('pickup')} style={{ accentColor: 'var(--accent-neon)' }} />
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>Retiro en local</div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Gratis (Av. de las Raíces 420)</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Gratis (Avenida Triunvirato 4135, Local 5 y 7)</div>
                   </div>
                 </label>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', flex: 1, backgroundColor: 'rgba(0,0,0,0.15)', padding: '16px', borderRadius: 'var(--radius-sm)', border: shippingMethod === 'delivery' ? '1px solid var(--accent-neon)' : '1px solid var(--border-glass)' }}>

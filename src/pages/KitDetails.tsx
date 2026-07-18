@@ -40,7 +40,7 @@ export const KitDetails: React.FC = () => {
 
   const getWhatsAppMessage = () => {
     const msg = `Hola Imperio Verde, estoy interesado en el "${kit.name}" y quiero verificar si se adapta a mi espacio y tipo de cultivo.`;
-    return `https://wa.me/5491123456789?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/5491153841079?text=${encodeURIComponent(msg)}`;
   };
 
   const isAvailable = kit.products.every(kp => (kp.product?.stock || 0) >= kp.quantity);
@@ -166,7 +166,7 @@ export const KitDetails: React.FC = () => {
                   <ShieldAlert size={16} /> Componente agotado temporalmente
                 </div>
                 <a 
-                  href={`https://wa.me/5491123456789?text=Hola%20Imperio%20Verde%2C%20quiero%20comprar%20el%20kit%20"${kit.name}"%20pero%20no%20hay%20stock.%20¿Me%20ayudan?`}
+                  href={`https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20quiero%20comprar%20el%20kit%20"${kit.name}"%20pero%20no%20hay%20stock.%20¿Me%20ayudan?`}
                   target="_blank" 
                   rel="noreferrer" 
                   className="btn btn-outline"

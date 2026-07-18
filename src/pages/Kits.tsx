@@ -159,7 +159,7 @@ export const Kits: React.FC = () => {
                       <ShieldAlert size={14} /> Componente agotado temporalmente
                     </div>
                     <a 
-                      href={`https://wa.me/5491123456789?text=Hola%20Imperio%20Verde%2C%20estoy%20interesado%20en%20el%20kit%20"${kit.name}"%20pero%20figura%20sin%20stock.%20¿Me%20pueden%20ofrecer%20una%20alternativa?`} 
+                      href={`https://wa.me/5491153841079?text=Hola%20Imperio%20Verde%2C%20estoy%20interesado%20en%20el%20kit%20"${kit.name}"%20pero%20figura%20sin%20stock.%20¿Me%20pueden%20ofrecer%20una%20alternativa?`}
                       target="_blank" 
                       rel="noreferrer" 
                       className="btn btn-outline"

@@ -40,7 +40,7 @@ export const AdminCarts: React.FC = () => {
     const contact = cart.contact_captured || '';
     const phoneClean = contact.replace(/\D/g, ''); 
     
-    const targetPhone = phoneClean.length >= 10 ? phoneClean : '5491123456789';
+    const targetPhone = phoneClean.length >= 10 ? phoneClean : '5491153841079';
     return `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
   };
 
