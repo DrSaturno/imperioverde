@@ -4,6 +4,7 @@ import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { ChevronRight, ArrowRight, ShieldCheck, AlertCircle, Compass, HelpCircle, Activity } from 'lucide-react';
+import { getProductImage } from './Shop';
 
 interface ProblemDetail {
   title: string;
@@ -174,10 +175,7 @@ export const Diagnostic: React.FC = () => {
               className="glass-card"
               style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
-                <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-title)' }}>{item.title}</h3>
-              </div>
+              <h3 style={{ fontSize: '1.2rem', fontFamily: 'var(--font-title)' }}>{item.title}</h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{item.intro}</p>
               <span style={{ fontSize: '0.85rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: 'auto', fontWeight: 600 }}>Ver Diagnóstico <ArrowRight size={12} /></span>
             </Link>
@@ -205,10 +203,7 @@ export const Diagnostic: React.FC = () => {
         {/* Left Column: Causes & Tips */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <span style={{ fontSize: '3rem' }}>{problem.emoji}</span>
-            <h1 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>{problem.title}</h1>
-          </div>
+          <h1 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>{problem.title}</h1>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>{problem.intro}</p>
 
@@ -273,11 +268,16 @@ export const Diagnostic: React.FC = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {relatedProducts.map(p => (
                   <div key={p.id} style={{ display: 'flex', gap: '12px', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-glass)' }}>
-                    <div>
-                      <Link to={`/productos/${p.category.toLowerCase()}/${p.id}`} style={{ fontSize: '0.85rem', fontWeight: 600 }} className="nav-link">
-                        {p.name}
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', minWidth: 0 }}>
+                      <Link to={`/productos/${p.category.toLowerCase()}/${p.id}`} style={{ backgroundColor: '#f7f8f6', width: '40px', height: '40px', borderRadius: '4px', overflow: 'hidden', flexShrink: 0, display: 'block' }}>
+                        <img src={getProductImage(p)} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '3px' }} />
                       </Link>
-                      <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>${(p.promotional_price || p.price).toLocaleString()}</div>
+                      <div style={{ minWidth: 0 }}>
+                        <Link to={`/productos/${p.category.toLowerCase()}/${p.id}`} style={{ fontSize: '0.85rem', fontWeight: 600 }} className="nav-link">
+                          {p.name}
+                        </Link>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>${(p.promotional_price || p.price).toLocaleString()}</div>
+                      </div>
                     </div>
                     {p.stock > 0 ? (
                       <button onClick={() => handleProductAdd(p)} className="btn btn-primary" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>Agregar</button>

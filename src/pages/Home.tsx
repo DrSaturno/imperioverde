@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
-import { ArrowRight, ChevronLeft, ChevronRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets, Wind, Sparkles } from 'lucide-react';
+import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets, Wind, Sparkles } from 'lucide-react';
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
@@ -24,37 +24,6 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [kits, setKits] = useState<Kit[]>([]);
-  const categoriesScrollRef = useRef<HTMLDivElement>(null);
-
-  // Auto-rotate the categories carousel, pausing while the user is interacting with it
-  useEffect(() => {
-    const el = categoriesScrollRef.current;
-    if (!el) return;
-    let paused = false;
-    const pause = () => { paused = true; };
-    const resume = () => { paused = false; };
-    el.addEventListener('mouseenter', pause);
-    el.addEventListener('mouseleave', resume);
-    el.addEventListener('touchstart', pause, { passive: true });
-
-    const interval = setInterval(() => {
-      if (paused) return;
-      const cardStep = 276;
-      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
-      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + cardStep, behavior: 'smooth' });
-    }, 3500);
-
-    return () => {
-      clearInterval(interval);
-      el.removeEventListener('mouseenter', pause);
-      el.removeEventListener('mouseleave', resume);
-      el.removeEventListener('touchstart', pause);
-    };
-  }, []);
-
-  const scrollCategories = (dir: 1 | -1) => {
-    categoriesScrollRef.current?.scrollBy({ left: dir * 276, behavior: 'smooth' });
-  };
 
   useEffect(() => {
     // Fetch top products and kits
@@ -196,10 +165,7 @@ export const Home: React.FC = () => {
               <div className="premium-cover-card-overlay"></div>
               
               <div className="premium-cover-card-content">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.5rem' }}>{item.icon}</span>
-                  <h3 style={{ fontSize: '1.15rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{item.title}</h3>
-                </div>
+                <h3 style={{ fontSize: '1.15rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{item.title}</h3>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>{item.desc}</p>
                 <span style={{ fontSize: '0.8rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px', fontWeight: 600 }}>
                   Ver Soluciones <ArrowRight size={12} />
@@ -241,9 +207,14 @@ export const Home: React.FC = () => {
               {/* Kit Components Preview */}
               <div style={{ backgroundColor: 'rgba(0,0,0,0.15)', padding: '12px', borderRadius: 'var(--radius-sm)', fontSize: '0.8rem' }}>
                 <div style={{ fontWeight: 600, marginBottom: '6px', color: 'var(--text-primary)' }}>Componentes incluidos:</div>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '4px', color: 'var(--text-secondary)' }}>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px', color: 'var(--text-secondary)' }}>
                   {kit.products.slice(0, 3).map(kp => (
-                    <li key={kp.product_id}>• {kp.quantity}x {kp.product?.name || 'Insumo'}</li>
+                    <li key={kp.product_id} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ backgroundColor: '#f7f8f6', width: '22px', height: '22px', borderRadius: '3px', overflow: 'hidden', flexShrink: 0, display: 'inline-flex' }}>
+                        {kp.product && <img src={getProductImage(kp.product)} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
+                      </span>
+                      {kp.quantity}x {kp.product?.name || 'Insumo'}
+                    </li>
                   ))}
                   {kit.products.length > 3 && <li>y {kit.products.length - 3} componente(s) más…</li>}
                 </ul>
@@ -275,42 +246,33 @@ export const Home: React.FC = () => {
 
       {/* 4. SECTIONS PORTAL / CATEGORIES */}
       <section className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
-          <div>
-            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías del E-commerce</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
-          </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <button onClick={() => scrollCategories(-1)} className="btn btn-outline category-carousel-arrow" aria-label="Categoría anterior">
-              <ChevronLeft size={18} />
-            </button>
-            <button onClick={() => scrollCategories(1)} className="btn btn-outline category-carousel-arrow" aria-label="Categoría siguiente">
-              <ChevronRight size={18} />
-            </button>
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>Categorías del E-commerce</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Encontrá equipamiento certificado y fertilizantes originales</p>
         </div>
 
-        <div className="category-carousel" ref={categoriesScrollRef}>
-          {CATEGORIES.map(c => (
-            <Link
-              key={c.cat}
-              to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
-              className="premium-cover-card category-carousel-item"
-            >
-              <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
-              <div className="premium-cover-card-overlay"></div>
+        <div className="category-carousel">
+          <div className="category-carousel-track">
+            {[...CATEGORIES, ...CATEGORIES].map((c, i) => (
+              <Link
+                key={`${c.cat}-${i}`}
+                to={`/productos?categoria=${encodeURIComponent(c.cat)}`}
+                className="premium-cover-card category-carousel-item"
+                tabIndex={i < CATEGORIES.length ? 0 : -1}
+                aria-hidden={i >= CATEGORIES.length}
+              >
+                <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
+                <div className="premium-cover-card-overlay"></div>
 
-              <div className="premium-cover-card-content">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.5rem' }}>{c.icon}</span>
+                <div className="premium-cover-card-content">
                   <h3 style={{ fontSize: '1.1rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{c.label}</h3>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
+                    Explorar <ArrowRight size={12} />
+                  </span>
                 </div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
-                  Explorar <ArrowRight size={12} />
-                </span>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

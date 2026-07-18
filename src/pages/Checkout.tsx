@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { dbService, OrderItem, Product } from '../services/db';
 import { ShieldCheck, ArrowLeft, RefreshCw, CheckCircle2, ChevronRight, HelpCircle } from 'lucide-react';
+import { getProductImage } from './Shop';
 
 export const Checkout: React.FC = () => {
   const { cart, sessionToken, totalAmount, clearCart, setContactInfo, addToCart } = useCart();
@@ -260,7 +261,7 @@ export const Checkout: React.FC = () => {
                 </button>
               ) : (
                 <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: 700 }}>
-                  Autorizar Pago y Finalizar
+                  Pagar
                 </button>
               )}
 
@@ -294,17 +295,9 @@ export const Checkout: React.FC = () => {
                       return (
                         <div key={item.id} style={{ backgroundColor: 'rgba(0,0,0,0.15)', padding: '10px', borderRadius: 'var(--radius-sm)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', border: '1px solid rgba(255,255,255,0.02)' }}>
                           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <span style={{ fontSize: '1rem', backgroundColor: 'rgba(0,0,0,0.2)', width: '28px', height: '28px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                              {item.category === 'Macetas' && '🪴'}
-                              {item.category === 'Fertilizantes' && '🧪'}
-                              {item.category === 'Medición' && '📊'}
-                              {item.category === 'Riego' && '💧'}
-                              {item.category === 'Control de Plagas' && '🐛'}
-                              {item.category === 'Parafernalia' && '🦁'}
-                              {item.category === 'Ventilación y Clima' && '💨'}
-                              {item.category === 'Sustratos y Medios' && '🪨'}
-                              {item.category === 'Accesorios' && '⚙️'}
-                            </span>
+                            <div style={{ backgroundColor: '#f7f8f6', width: '28px', height: '28px', borderRadius: '4px', overflow: 'hidden', flexShrink: 0 }}>
+                              <img src={getProductImage(item)} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                            </div>
                             <div>
                               <div style={{ fontWeight: 700, fontSize: '0.75rem', maxWidth: '120px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={item.name}>{item.name}</div>
                               <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>${price.toLocaleString()}</div>

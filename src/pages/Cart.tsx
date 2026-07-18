@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { dbService, Product } from '../services/db';
 import { ShoppingBag, Trash2, ArrowRight, ShieldCheck, ChevronRight } from 'lucide-react';
+import { getProductImage } from './Shop';
 
 export const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, rawTotal, totalAmount, totalSavings, addToCart } = useCart();
@@ -54,20 +55,9 @@ export const Cart: React.FC = () => {
               
               {/* Product Info */}
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <span style={{ fontSize: '2rem', backgroundColor: 'rgba(0,0,0,0.15)', width: '50px', height: '50px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {item.product.category === 'Fertilizantes' && '🧪'}
-                  {item.product.category === 'Ventilación y Clima' && '💨'}
-                  {item.product.category === 'Medición' && '📊'}
-                  {item.product.category === 'Sustratos y Medios' && '🪨'}
-                  {item.product.category === 'Parafernalia' && '🦁'}
-                  {item.product.category === 'Macetas' && '🪴'}
-                  {item.product.category === 'Riego' && '💧'}
-                  {item.product.category === 'Control de Plagas' && '🐛'}
-                  {item.product.category === 'Jardinería' && '🛠️'}
-                  {item.product.category === 'Cosecha y Secado' && '✂️'}
-                  {item.product.category === 'Iluminación' && '💡'}
-                  {item.product.category === 'Accesorios' && '⚙️'}
-                </span>
+                <Link to={`/productos/${item.product.category.toLowerCase()}/${item.product.id}`} style={{ backgroundColor: '#f7f8f6', width: '50px', height: '50px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+                  <img src={getProductImage(item.product)} alt={item.product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+                </Link>
                 <div>
                   <Link to={`/productos/${item.product.category.toLowerCase()}/${item.product.id}`} style={{ fontWeight: 700, fontSize: '0.95rem' }} className="nav-link">
                     {item.product.name}
@@ -130,17 +120,9 @@ export const Cart: React.FC = () => {
                     const price = item.promotional_price || item.price;
                     return (
                       <div key={item.id} style={{ backgroundColor: 'rgba(0,0,0,0.15)', padding: '12px', borderRadius: 'var(--radius-sm)', display: 'flex', flexDirection: 'column', gap: '8px', border: '1px solid rgba(255,255,255,0.02)' }}>
-                        <span style={{ fontSize: '1.25rem', textAlign: 'center', backgroundColor: 'rgba(0,0,0,0.2)', padding: '6px', borderRadius: '4px' }}>
-                          {item.category === 'Macetas' && '🪴'}
-                          {item.category === 'Fertilizantes' && '🧪'}
-                          {item.category === 'Medición' && '📊'}
-                          {item.category === 'Riego' && '💧'}
-                          {item.category === 'Control de Plagas' && '🐛'}
-                          {item.category === 'Parafernalia' && '🦁'}
-                          {item.category === 'Ventilación y Clima' && '💨'}
-                          {item.category === 'Sustratos y Medios' && '🪨'}
-                          {item.category === 'Accesorios' && '⚙️'}
-                        </span>
+                        <div style={{ backgroundColor: '#f7f8f6', height: '70px', borderRadius: '4px', overflow: 'hidden' }}>
+                          <img src={getProductImage(item)} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} />
+                        </div>
                         <div>
                           <div style={{ fontWeight: 700, fontSize: '0.75rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={item.name}>{item.name}</div>
                           <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>{item.brand}</div>

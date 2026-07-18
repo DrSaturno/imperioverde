@@ -4,6 +4,7 @@ import { dbService, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { ChevronRight, ArrowRight, CheckCircle, MessageSquare, Info, ShieldAlert, Sparkles } from 'lucide-react';
+import { getProductImage } from './Shop';
 
 export const KitDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -93,9 +94,12 @@ export const KitDetails: React.FC = () => {
               {kit.products.map(kp => (
                 <div key={kp.product_id} style={{ display: 'flex', justifyItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '12px' }}>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                    <span style={{ backgroundColor: 'rgba(0, 230, 118, 0.08)', color: 'var(--accent-neon)', fontWeight: 700, width: '28px', height: '28px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem' }}>
-                      {kp.quantity}x
-                    </span>
+                    <Link to={`/productos/${kp.product?.category.toLowerCase()}/${kp.product_id}`} style={{ position: 'relative', backgroundColor: '#f7f8f6', width: '44px', height: '44px', borderRadius: '4px', overflow: 'hidden', flexShrink: 0, display: 'block' }}>
+                      {kp.product && <img src={getProductImage(kp.product)} alt={kp.product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '3px' }} />}
+                      <span style={{ position: 'absolute', bottom: 0, right: 0, backgroundColor: 'var(--accent-neon)', color: '#030a06', fontWeight: 700, fontSize: '0.65rem', padding: '1px 4px', borderRadius: '4px 0 0 0' }}>
+                        {kp.quantity}x
+                      </span>
+                    </Link>
                     <div>
                       <Link to={`/productos/${kp.product?.category.toLowerCase()}/${kp.product_id}`} style={{ fontWeight: 600, fontSize: '0.9rem' }} className="nav-link">
                         {kp.product?.name || 'Insumo'}

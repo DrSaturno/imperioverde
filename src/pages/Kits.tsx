@@ -4,6 +4,7 @@ import { dbService, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { Sparkles, ArrowRight, ShieldAlert, BadgeInfo } from 'lucide-react';
+import { getProductImage } from './Shop';
 
 export const Kits: React.FC = () => {
   const [kits, setKits] = useState<Kit[]>([]);
@@ -148,8 +149,13 @@ export const Kits: React.FC = () => {
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em', display: 'block', marginBottom: '8px' }}>Productos Incluidos</span>
                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.8rem' }}>
                   {kit.products.map(kp => (
-                    <li key={kp.product_id} style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
-                      <span>• {kp.quantity}x {kp.product?.name || 'Insumo'}</span>
+                    <li key={kp.product_id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-secondary)' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ backgroundColor: '#f7f8f6', width: '20px', height: '20px', borderRadius: '3px', overflow: 'hidden', flexShrink: 0, display: 'inline-flex' }}>
+                          {kp.product && <img src={getProductImage(kp.product)} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
+                        </span>
+                        {kp.quantity}x {kp.product?.name || 'Insumo'}
+                      </span>
                       <span style={{ color: (kp.product?.stock || 0) >= kp.quantity ? 'var(--accent-neon)' : 'var(--text-muted)', fontSize: '0.7rem' }}>
                         {(kp.product?.stock || 0) >= kp.quantity ? 'Ok' : 'Sin stock'}
                       </span>
