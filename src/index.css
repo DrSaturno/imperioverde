@@ -4,14 +4,15 @@
 
 :root {
   /* Fonts */
-  --font-title: 'Outfit', sans-serif;
+  --font-title: 'Cinzel', serif;
+  --font-brand: 'Cinzel Decorative', serif;
   --font-body: 'Inter', sans-serif;
 
   /* Color Palette */
   --bg-primary: #0a1b12;        /* Dark Forest Green Background */
   --bg-secondary: #12281c;      /* Slightly Lighter Green */
   --bg-tertiary: #193827;       /* Card/Container Background */
-  --bg-glass: rgba(18, 40, 28, 0.65); /* Glassmorphism Overlay */
+  --bg-glass: rgba(18, 40, 28, 0.72); /* Glassmorphism Overlay */
   
   --text-primary: #ffffff;      /* White Text */
   --text-secondary: #a3c4b2;    /* Muted Sage Green Text */
@@ -28,9 +29,9 @@
   --action-yellow: #ffd600;     /* Gold Yellow: Promotions & Highlights */
   --action-yellow-hover: #ffea00;
   
-  --border-color: rgba(0, 230, 118, 0.15);
+  --border-color: rgba(255, 214, 0, 0.22);
   --border-violet: rgba(142, 36, 170, 0.25);
-  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.1);
 
   --shadow-neon: 0 8px 32px 0 rgba(0, 230, 118, 0.08);
   --shadow-violet: 0 8px 32px 0 rgba(142, 36, 170, 0.12);
@@ -61,6 +62,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+
+  /* Botanical sketches fixed in the margins of the screen */
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(142, 36, 170, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(0, 230, 118, 0.04) 0%, transparent 45%),
+    /* Left vintage cannabis leaf sketch */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23a3c4b2' stroke-width='0.6' opacity='0.035'><path d='M50,50 Q48,25 50,5 Q52,25 50,50 M50,50 Q63,30 75,18 Q65,37 50,50 M50,50 Q75,43 90,40 Q75,55 50,50 M50,50 Q37,30 25,18 Q35,37 50,50 M50,50 Q25,43 10,40 Q25,55 50,50 M50,50 Q70,68 80,80 Q62,72 50,50 M50,50 Q30,68 20,80 Q38,72 50,50 M50,50 L50,95'/></svg>"),
+    /* Right vintage cannabis leaf sketch */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23ffd600' stroke-width='0.5' opacity='0.025'><path d='M50,50 Q48,25 50,5 Q52,25 50,50 M50,50 Q63,30 75,18 Q65,37 50,50 M50,50 Q75,43 90,40 Q75,55 50,50 M50,50 Q37,30 25,18 Q35,37 50,50 M50,50 Q25,43 10,40 Q25,55 50,50 M50,50 Q70,68 80,80 Q62,72 50,50 M50,50 Q30,68 20,80 Q38,72 50,50 M50,50 L50,95'/></svg>");
+  background-position: left 2% top 15%, right 2% top 55%;
+  background-size: 320px, 350px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -107,44 +121,243 @@ button, input, select, textarea {
   .container { padding: 0 16px; }
 }
 
-/* Glassmorphism Styles */
+/* Glassmorphism Styles with Magical Greenhouse Feel and Ornate Corners */
 .glass-card {
-  background: var(--bg-glass);
+  background: 
+    /* Top-left corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M2,18 V2 H18 M5,14 V5 H14'/></svg>"),
+    /* Bottom-right corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M22,6 V22 H6 M19,10 V19 H10'/></svg>"),
+    radial-gradient(circle at top left, rgba(142, 36, 170, 0.08), transparent 60%), 
+    var(--bg-glass);
+  background-position: top 4px left 4px, bottom 4px right 4px, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(255, 214, 0, 0.18);
   border-radius: var(--radius-md);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.04);
   padding: 24px;
   transition: var(--transition-smooth);
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 230, 118, 0.3);
-  box-shadow: var(--shadow-neon);
-  transform: translateY(-4px);
+  border-color: rgba(255, 214, 0, 0.45);
+  box-shadow: 0 12px 40px rgba(0, 230, 118, 0.1), 0 0 20px rgba(142, 36, 170, 0.2);
+  transform: translateY(-5px);
+}
+
+.glass-card.violet {
+  border-color: rgba(142, 36, 170, 0.25);
+  background-image: 
+    /* Top-left corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.75'><path d='M2,18 V2 H18 M5,14 V5 H14'/></svg>"),
+    /* Bottom-right corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.75'><path d='M22,6 V22 H6 M19,10 V19 H10'/></svg>"),
+    radial-gradient(circle at top left, rgba(142, 36, 170, 0.08), transparent 60%), 
+    var(--bg-glass);
 }
 
 .glass-card.violet:hover {
-  border-color: rgba(142, 36, 170, 0.5);
-  box-shadow: var(--shadow-violet);
+  border-color: rgba(142, 36, 170, 0.6);
+  box-shadow: 0 12px 40px rgba(142, 36, 170, 0.25), 0 0 20px rgba(255, 214, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+/* Hero Video Section Full Width */
+.hero-video-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.hero-video-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 50% 35%, rgba(3, 10, 6, 0.45) 0%, rgba(3, 10, 6, 0.85) 70%, rgba(3, 10, 6, 0.98) 100%),
+    linear-gradient(180deg, rgba(3, 10, 6, 0.75) 0%, rgba(3, 10, 6, 0.25) 45%, rgba(3, 10, 6, 0.98) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-video-content {
+  position: relative;
+  z-index: 3;
+  padding-top: 140px;
+  padding-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+  max-width: 900px !important;
+}
+
+.hero-video-title {
+  font-size: 3.6rem;
+  font-family: var(--font-title);
+  line-height: 1.1;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+  letter-spacing: -0.02em;
+}
+
+.hero-highlight-text {
+  color: var(--action-yellow);
+  text-shadow: 0 0 24px rgba(255, 214, 0, 0.6), 0 0 48px rgba(255, 214, 0, 0.25);
+}
+
+.hero-video-subtitle {
+  color: rgba(240, 248, 242, 0.92);
+  font-size: 1.25rem;
+  max-width: 680px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+}
+
+.hero-buttons-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.hero-trust-bar {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 12px 28px;
+  background: rgba(3, 14, 8, 0.65);
+  border: 1px solid rgba(255, 214, 0, 0.25);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 900px) {
+  .hero-video-section {
+    min-height: 80vh;
+  }
+  .hero-video-content {
+    padding-top: 120px;
+    padding-bottom: 50px;
+    gap: 18px;
+  }
+  .hero-video-title {
+    font-size: 2.5rem;
+  }
+  .hero-video-subtitle {
+    font-size: 1.05rem;
+  }
+  .hero-br-desktop {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-video-title {
+    font-size: 2rem;
+  }
+  .hero-trust-bar {
+    gap: 12px;
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.hero-wonka-banner {
+  padding: 80px 40px;
+  border-radius: var(--radius-lg) !important;
+  background-image: 
+    /* Top-left corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.85'><path d='M3,24 V3 H24 M7,18 V7 H18'/></svg>"),
+    /* Bottom-right corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.85'><path d='M29,8 V29 H8 M25,14 V25 H14'/></svg>"),
+    linear-gradient(90deg, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.9) 43%, rgba(3, 10, 6, 0.22) 75%, rgba(3, 10, 6, 0.08) 100%), 
+    url('/home/hero-cannabis.webp') !important;
+  background-position: top 8px left 8px, bottom 8px right 8px, 0 0, center right;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, cover;
+  border: 1px solid var(--border-color) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1200px;
 }
 
 .home-hydro-banner {
+  padding: 60px 40px;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border-violet) !important;
   background-image:
+    /* Top-left corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M2,20 V2 H20 M6,14 V6 H14'/></svg>"),
+    /* Bottom-right corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M26,8 V26 H8 M22,12 V22 H12'/></svg>"),
     linear-gradient(90deg, rgba(13, 6, 22, 0.98) 0%, rgba(18, 8, 28, 0.92) 42%, rgba(35, 11, 48, 0.42) 72%, rgba(18, 6, 27, 0.26) 100%),
     url('/home/hydroponics-banner-v2.webp');
-  background-size: cover;
-  background-position: center;
+  background-position: top 8px left 8px, bottom 8px right 8px, 0 0, center;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, cover;
   overflow: hidden;
 }
 
 .home-advice-banner {
+  padding: 40px !important;
+  border-left: 6px solid var(--action-yellow) !important;
+  border-top: 1px solid rgba(255, 214, 0, 0.15) !important;
+  border-right: 1px solid rgba(255, 214, 0, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 214, 0, 0.15) !important;
   background-image:
+    /* Top-left corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M2,14 V2 H14 M4,10 V4 H10'/></svg>"),
+    /* Bottom-right corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M18,6 V18 H6 M16,8 V16 H8'/></svg>"),
     linear-gradient(90deg, rgba(8, 28, 18, 0.99) 0%, rgba(8, 28, 18, 0.96) 48%, rgba(8, 28, 18, 0.63) 70%, rgba(8, 28, 18, 0.28) 100%),
     url('/home/technical-advice-banner-v2.webp');
-  background-size: cover;
-  background-position: center;
+  background-position: top 6px left 12px, bottom 6px right 6px, 0 0, center;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: auto, auto, auto, cover;
   overflow: hidden;
 }
 
@@ -156,12 +369,16 @@ button, input, select, textarea {
 
   .home-hydro-banner {
     background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M2,20 V2 H20 M6,14 V6 H14'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M26,8 V26 H8 M22,12 V22 H12'/></svg>"),
       linear-gradient(180deg, rgba(13, 6, 22, 0.94) 0%, rgba(13, 6, 22, 0.92) 68%, rgba(25, 8, 35, 0.82) 100%),
       url('/home/hydroponics-banner-v2.webp');
   }
 
   .home-advice-banner {
     background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M2,14 V2 H14 M4,10 V4 H10'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.75'><path d='M18,6 V18 H6 M16,8 V16 H8'/></svg>"),
       linear-gradient(180deg, rgba(8, 28, 18, 0.94) 0%, rgba(8, 28, 18, 0.91) 72%, rgba(8, 28, 18, 0.78) 100%),
       url('/home/technical-advice-banner-v2.webp');
   }
@@ -183,47 +400,54 @@ button, input, select, textarea {
 }
 
 .btn-primary {
-  background-color: var(--accent-neon);
-  color: #030a06;
+  background: linear-gradient(135deg, var(--accent-neon) 0%, #00c853 100%);
+  color: #050f0a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 230, 118, 0.15);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-neon-hover);
-  box-shadow: 0 0 16px var(--accent-neon-glow);
-  transform: scale(1.02);
+  background: linear-gradient(135deg, var(--accent-neon-hover) 0%, #00a142 100%);
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .btn-violet {
-  background-color: var(--accent-violet);
+  background: linear-gradient(135deg, var(--accent-violet) 0%, #7b1fa2 100%);
   color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(142, 36, 170, 0.15);
 }
 
 .btn-violet:hover {
-  background-color: var(--accent-violet-hover);
-  box-shadow: 0 0 16px var(--accent-violet-glow);
-  transform: scale(1.02);
+  background: linear-gradient(135deg, var(--accent-violet-hover) 0%, #6a1b9a 100%);
+  box-shadow: 0 0 20px rgba(142, 36, 170, 0.4);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .btn-outline {
   background-color: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(255, 214, 0, 0.25);
 }
 
 .btn-outline:hover {
   background-color: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-secondary);
+  border-color: var(--action-yellow-hover);
+  box-shadow: 0 0 12px rgba(255, 214, 0, 0.15);
 }
 
 .btn-yellow {
-  background-color: var(--action-yellow);
-  color: #030a06;
+  background: linear-gradient(135deg, var(--action-yellow) 0%, #ffc107 100%);
+  color: #050f0a;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 214, 0, 0.15);
 }
 
 .btn-yellow:hover {
-  background-color: var(--action-yellow-hover);
-  box-shadow: 0 0 16px rgba(255, 214, 0, 0.3);
-  transform: scale(1.02);
+  background: linear-gradient(135deg, var(--action-yellow-hover) 0%, #ffb300 100%);
+  box-shadow: 0 0 20px rgba(255, 214, 0, 0.45);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .input {
@@ -323,8 +547,8 @@ button, input, select, textarea {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-glass);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 214, 0, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
   transition: var(--transition-smooth);
   background-color: var(--bg-secondary);
 }
@@ -374,8 +598,8 @@ button, input, select, textarea {
 /* Hover effects */
 .premium-product-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(0, 230, 118, 0.45);
-  box-shadow: 0 12px 40px rgba(0, 230, 118, 0.18);
+  border-color: rgba(255, 214, 0, 0.45);
+  box-shadow: 0 12px 40px rgba(0, 230, 118, 0.12), 0 0 20px rgba(142, 36, 170, 0.22);
 }
 
 .premium-product-card:hover .premium-product-card-img {
@@ -424,17 +648,26 @@ button, input, select, textarea {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(255, 214, 0, 0.18);
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: var(--transition-smooth);
   height: 100%;
+
+  /* Ornate corner frames inside product cards */
+  background-image: 
+    /* Top-left corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffd600' stroke-width='1' opacity='0.45'><path d='M1,10 V1 H10 M3,7 V3 H7'/></svg>"),
+    /* Bottom-right corner */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffd600' stroke-width='1' opacity='0.45'><path d='M15,6 V15 H6 M13,9 V13 H9'/></svg>");
+  background-position: top 4px left 4px, bottom 4px right 4px;
+  background-repeat: no-repeat, no-repeat;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  border-color: var(--accent-neon);
-  box-shadow: 0 8px 24px rgba(0, 230, 118, 0.15);
+  border-color: rgba(255, 214, 0, 0.45);
+  box-shadow: 0 8px 24px rgba(255, 214, 0, 0.12), 0 0 15px rgba(142, 36, 170, 0.15);
 }
 
 .product-card-img-container {

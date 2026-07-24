@@ -109,3 +109,14 @@ Thumbs.db
 dist/
 dist-ssr/
 *.local
+
+# Temporary & AI Scratch Folders
+.claude/
+.playwright-cli/
+tmp/
+output/
+test_download/
+test_icrawler_download/
+/videoloop1.mp4
+
+

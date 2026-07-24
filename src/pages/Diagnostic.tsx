@@ -156,14 +156,14 @@ export const Diagnostic: React.FC = () => {
     return (
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--accent-neon)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '12px' }}>
-            <Activity size={16} /> ASESORAMIENTO E-COMMERCE ACTIVO
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--action-yellow)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '12px' }}>
+            <Activity size={16} /> ✨ CONSULTORÍA DEL ORÁCULO BOTÁNICO ✨
           </div>
           <h1 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
-            ¿Qué inconveniente tenés en tu cultivo?
+            ¿Qué misterio botánico resolveremos hoy?
           </h1>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0.5rem auto' }}>
-            Seleccioná una guía de diagnóstico rápido para ver causas comunes y los insumos compatibles recomendados por nuestros expertos.
+            Consulta nuestro oráculo de diagnóstico rápido para descubrir los secretos de tu cultivo y las pócimas compatibles recomendadas por nuestros expertos.
           </p>
         </div>
 

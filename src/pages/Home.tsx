@@ -66,35 +66,35 @@ export const Home: React.FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
       
-      {/* 1. HERO SECTION */}
-      <section className="container" style={{ marginTop: '20px' }}>
-        <div 
-          className="glass-card" 
-          style={{ 
-            padding: '80px 40px', 
-            borderRadius: 'var(--radius-lg)', 
-            backgroundImage: 'linear-gradient(90deg, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.9) 43%, rgba(3, 10, 6, 0.22) 75%, rgba(3, 10, 6, 0.08) 100%), url("/home/hero-cannabis.webp")',
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center right',
-            border: '1px solid rgba(0, 230, 118, 0.2)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px',
-            maxWidth: '1200px'
-          }}
-        >
-          <div style={{ display: 'inline-flex', alignSelf: 'flex-start' }}>
-            <span className="badge badge-green">🍁 EXPERTOS EN CULTIVO & HIDROPONÍA</span>
+      {/* 1. FULL WIDTH HERO VIDEO HEADER */}
+      <section className="hero-video-section">
+        <video
+          src="/videoloop1.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="hero-video-element"
+        />
+        <div className="hero-video-overlay" />
+
+        <div className="container hero-video-content">
+          <div style={{ display: 'inline-flex' }}>
+            <span className="badge badge-yellow">✨ EL IMPERIO DE MARIHUANA MÁS MÁGICO ✨</span>
           </div>
-          <h1 style={{ fontSize: '3rem', fontFamily: 'var(--font-title)', lineHeight: 1.1, maxWidth: '700px', fontWeight: 800 }}>
-            TODO LO QUE NECESITÁS PARA <span style={{ color: 'var(--accent-neon)' }}>CULTIVAR MEJOR</span>
+
+          <h1 className="hero-video-title">
+            TODO LO QUE NECESITÁS PARA <br className="hero-br-desktop" />
+            <span className="hero-highlight-text">CULTIVAR MEJOR</span>
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', fontWeight: 500 }}>
-            Equipamiento técnico, nutrición especializada y asesoramiento real para indoor, exterior e hidroponía. Sin vueltas ni tecnicismos difíciles.
+
+          <p className="hero-video-subtitle">
+            Nutrientes alquímicos, equipamiento de fantasía y asesoramiento real para indoor e hidroponía. El secreto de la abundancia sin secretos.
           </p>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '12px' }}>
+
+          <div className="hero-buttons-group">
             <Link to="/productos" className="btn btn-primary" onClick={() => dbService.logEvent(sessionToken, 'hero_click', { action: 'ver_productos' })}>
-              Ver Catálogo Completo <ArrowRight size={16} />
+              Ver Catálogo Completo <ArrowRight size={18} />
             </Link>
             <a 
               href={getWhatsAppLink('general')} 
@@ -105,6 +105,21 @@ export const Home: React.FC = () => {
             >
               Pedir Asesoramiento Gratis
             </a>
+          </div>
+
+          <div className="hero-trust-bar">
+            <div className="hero-trust-item">
+              <Sparkles size={16} style={{ color: 'var(--action-yellow)' }} />
+              <span>Envíos a todo el país</span>
+            </div>
+            <div className="hero-trust-item">
+              <Leaf size={16} style={{ color: 'var(--accent-neon)' }} />
+              <span>Asesoramiento cultivo gratis</span>
+            </div>
+            <div className="hero-trust-item">
+              <ShieldCheck size={16} style={{ color: 'var(--action-yellow)' }} />
+              <span>3 Cuotas Sin Interés</span>
+            </div>
           </div>
         </div>
       </section>
@@ -144,8 +159,8 @@ export const Home: React.FC = () => {
       {/* 3. RESOLVE PROBLEMS SECTION */}
       <section className="container">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>¿Qué necesitás resolver hoy?</h2>
-          <p style={{ color: 'var(--text-secondary)' }}>Navegá nuestra tienda a partir de la necesidad o el problema directo en tu cultivo</p>
+          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', marginBottom: '12px' }}>¿Qué misterio botánico necesitás resolver hoy?</h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Navegá nuestro imperio a partir del misterio o la necesidad en tu cultivo</p>
         </div>
         <div className="grid grid-cols-3">
           {[
@@ -213,9 +228,9 @@ export const Home: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--action-yellow)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '8px' }}>
-              <Sparkles size={16} /> AHORRÁ COMPRANDO SOLUCIONES COMPLETAS
+              <Sparkles size={16} /> CÓMBO BOTÁNICO CON DESCUENTOS MÁGICOS
             </div>
-            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)' }}>Kits de Cultivo Inteligentes</h2>
+            <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)' }}>Kits de Cultivo Alquímicos</h2>
           </div>
           <Link to="/kits" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
             Ver Todos los Kits <ArrowRight size={16} />
@@ -278,18 +293,7 @@ export const Home: React.FC = () => {
 
       {/* 5. SECCIÓN DESTACADA: HIDROPONÍA */}
       <section className="container">
-        <div 
-          className="glass-card violet home-hydro-banner" 
-          style={{ 
-            padding: '60px 40px', 
-            borderRadius: 'var(--radius-lg)', 
-            border: '1px solid rgba(142, 36, 170, 0.4)',
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 0.8fr',
-            gap: '40px',
-            alignItems: 'center'
-          }}
-        >
+        <div className="glass-card violet home-hydro-banner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <span className="badge badge-violet" style={{ alignSelf: 'flex-start' }}>🧪 SECCIÓN ESPECIALIZADA</span>
             <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
@@ -398,7 +402,7 @@ export const Home: React.FC = () => {
 
       {/* 7. WHATSAPP ADVISING CTA */}
       <section className="container">
-        <div className="glass-card home-advice-banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '30px', padding: '40px', borderLeft: '6px solid var(--accent-neon)' }}>
+        <div className="glass-card home-advice-banner">
           <div style={{ maxWidth: '650px' }}>
             <h2 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-title)', marginBottom: '8px' }}>¿No sabés qué elegir para empezar a cultivar?</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>

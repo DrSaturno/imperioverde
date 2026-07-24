@@ -52,11 +52,11 @@ export const Kits: React.FC = () => {
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--action-yellow)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '12px' }}>
-          <Sparkles size={16} /> COMPRAS INTELIGENTES CON AHORRO REAL
+          <Sparkles size={16} /> CÓMBOS BOTÁNICOS CON DESCUENTOS MÁGICOS
         </div>
-        <h1 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800, marginBottom: '12px' }}>Kits de Cultivo Imperio Verde</h1>
+        <h1 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800, marginBottom: '12px' }}>Kits de Cultivo Alquímicos Imperio Verde</h1>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto' }}>
-          Soluciones integrales prediseñadas por nuestros expertos cultivadores. Aseguran compatibilidad biológica y técnica, simplificando tu proceso de compra.
+          Soluciones integrales prediseñadas por nuestros expertos cultivadores. Aseguran compatibilidad mística y técnica, simplificando tu proceso de compra.
         </p>
       </div>
 

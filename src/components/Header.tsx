@@ -11,9 +11,24 @@ export const Header: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [productsList, setProductsList] = useState<Product[]>([]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Track scroll position for header transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Fetch products for search bar matching
   useEffect(() => {
@@ -54,9 +69,9 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={`site-header-wrapper ${isScrolled ? 'is-scrolled' : 'is-top'}`}>
       {/* Promo Bar */}
-      <div className="promo-bar" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '6px 0', fontSize: '0.8rem', textAlign: 'center', fontFamily: 'var(--font-title)' }}>
+      <div className="promo-bar" style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', padding: '6px 0', fontSize: '0.8rem', textAlign: 'center', fontFamily: 'var(--font-title)' }}>
         <div className="container promo-bar-content" style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
           <span className="promo-bar-item">🚛 Envíos Gratis en compras mayores a $60.000</span>
           <span className="promo-bar-item">🏠 Retiro Inmediato en Grow Sucursal</span>
@@ -65,7 +80,7 @@ export const Header: React.FC = () => {
       </div>
 
       {/* Main Header */}
-      <header className="site-header" style={{ position: 'sticky', top: 0, zIndex: 90, padding: '16px 0' }}>
+      <header className="site-header" style={{ padding: '14px 0' }}>
         <div className="container header-main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
           
           {/* Logo */}
@@ -78,7 +93,7 @@ export const Header: React.FC = () => {
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative' }}>
               <input
                 type="text"
-                placeholder="¿Qué necesitás para tu cultivo?"
+                placeholder="¿Qué misterio buscas resolver?"
                 aria-label="Buscar productos"
                 value={searchQuery}
                 onChange={(e) => {
@@ -164,7 +179,7 @@ export const Header: React.FC = () => {
             <form onSubmit={triggerSearchSubmit} style={{ display: 'flex', position: 'relative', marginBottom: '10px' }}>
               <input
                 type="text"
-                placeholder="¿Qué necesitás para tu cultivo?"
+                placeholder="¿Qué misterio buscas resolver?"
                 aria-label="Buscar productos"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -197,16 +212,49 @@ export const Header: React.FC = () => {
           </div>
         )}
       </header>
-
-      {/* Styles details to support hiding desktop/mobile parts */}
       <style>{`
+        .site-header-wrapper {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          z-index: 1000;
+          transition: all 300ms ease;
+        }
         .site-header {
+          transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease, backdrop-filter 300ms ease;
+        }
+        .promo-bar {
+          transition: background-color 300ms ease, border-color 300ms ease;
+        }
+        /* Top (unscrolled) state */
+        .site-header-wrapper.is-top .promo-bar {
+          background-color: rgba(2, 10, 6, 0.4) !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+        }
+        .site-header-wrapper.is-top .site-header {
+          background: transparent !important;
+          border-bottom: 1px solid transparent !important;
+          box-shadow: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+        /* Scrolled state */
+        .site-header-wrapper.is-scrolled .promo-bar {
+          background-color: rgba(2, 8, 4, 0.96) !important;
+          border-bottom: 1px solid rgba(255, 214, 0, 0.15) !important;
+        }
+        .site-header-wrapper.is-scrolled .site-header {
           background:
-            radial-gradient(circle at 28% 0%, rgba(142,36,170,0.16), transparent 34%),
-            linear-gradient(90deg, rgba(5,18,11,0.98), rgba(10,30,19,0.98) 52%, rgba(8,19,13,0.98));
-          border-bottom: 1px solid rgba(236,212,68,0.38);
-          box-shadow: 0 10px 32px rgba(0,0,0,0.3), 0 1px 0 rgba(142,36,170,0.18) inset;
-          backdrop-filter: blur(14px);
+            radial-gradient(circle at 28% 0%, rgba(142,36,170,0.22), transparent 38%),
+            linear-gradient(90deg, rgba(5,18,11,0.96), rgba(10,30,19,0.96) 52%, rgba(8,19,13,0.96)) !important;
+          border-bottom: 1px solid rgba(255, 214, 0, 0.35) !important;
+          box-shadow: 0 10px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(142, 36, 170, 0.2) inset !important;
+          backdrop-filter: blur(14px) !important;
+          -webkit-backdrop-filter: blur(14px) !important;
         }
         .header-logo-link {
           display: flex;
@@ -218,9 +266,14 @@ export const Header: React.FC = () => {
           width: 168px;
           height: auto;
           object-fit: contain;
+          filter: drop-shadow(0 0 4px rgba(0, 230, 118, 0.15));
+          transition: filter 0.3s ease;
+        }
+        .header-logo-link:hover .header-logo-image {
+          filter: drop-shadow(0 0 8px rgba(255, 214, 0, 0.4)) drop-shadow(0 0 12px rgba(142, 36, 170, 0.25));
         }
         .header-nav-link {
-          color: #ecd444;
+          color: var(--action-yellow);
           position: relative;
           transition: color 180ms ease, transform 180ms ease;
         }
@@ -228,11 +281,11 @@ export const Header: React.FC = () => {
         .header-nav-link.is-active {
           color: #d45aee;
           transform: translateY(-1px);
-          text-shadow: 0 0 18px rgba(212,90,238,0.24);
+          text-shadow: 0 0 18px rgba(212,90,238,0.3);
         }
         .header-search-input {
           background-color: rgba(2,10,6,0.62);
-          border-color: rgba(236,212,68,0.34);
+          border-color: rgba(255, 214, 0, 0.25);
           color: #f4f8f5;
         }
         .header-search-input::placeholder {
@@ -245,7 +298,7 @@ export const Header: React.FC = () => {
         .header-search-button,
         .header-cart-link,
         .mobile-toggle {
-          color: #ecd444;
+          color: var(--action-yellow);
           transition: color 180ms ease, transform 180ms ease;
         }
         .header-search-button:hover,
@@ -256,11 +309,12 @@ export const Header: React.FC = () => {
         }
         .mobile-nav {
           background:
-            radial-gradient(circle at 90% 0%, rgba(142,36,170,0.2), transparent 45%),
+            radial-gradient(circle at 90% 0%, rgba(142,36,170,0.25), transparent 45%),
             linear-gradient(145deg, #06150d, #0b2115);
-          border-top: 1px solid rgba(236,212,68,0.25);
-          border-bottom: 1px solid rgba(236,212,68,0.2);
-          box-shadow: 0 16px 30px rgba(0,0,0,0.48);
+          border-top: 1px solid rgba(255, 214, 0, 0.25);
+          border-bottom: 1px solid rgba(255, 214, 0, 0.2);
+          box-shadow: 0 16px 30px rgba(0,0,0,0.6);
+          backdrop-filter: blur(14px);
         }
         .mobile-menu-link {
           display: flex;
@@ -296,6 +350,6 @@ export const Header: React.FC = () => {
           }
         }
       `}</style>
-    </>
+    </div>
   );
 };
