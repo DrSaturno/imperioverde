@@ -126,6 +126,8 @@ create_wooden_signboard.py
 create_premium_wooden_signboards.py
 process_uploaded_banner.py
 create_matching_resolver_banner.py
+tight_crop_user_banner.py
+
 
 
 
