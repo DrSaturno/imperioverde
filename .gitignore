@@ -118,5 +118,7 @@ output/
 test_download/
 test_icrawler_download/
 /videoloop1.mp4
+create_category_cards.py
+
 
 
