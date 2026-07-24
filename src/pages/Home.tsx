@@ -116,10 +116,6 @@ export const Home: React.FC = () => {
               <Leaf size={16} style={{ color: 'var(--accent-neon)' }} />
               <span>Asesoramiento cultivo gratis</span>
             </div>
-            <div className="hero-trust-item">
-              <ShieldCheck size={16} style={{ color: 'var(--action-yellow)' }} />
-              <span>3 Cuotas Sin Interés</span>
-            </div>
           </div>
         </div>
       </section>

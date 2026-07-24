@@ -75,7 +75,6 @@ export const Header: React.FC = () => {
         <div className="container promo-bar-content" style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
           <span className="promo-bar-item">🚛 Envíos Gratis en compras mayores a $60.000</span>
           <span className="promo-bar-item">🏠 Retiro Inmediato en Grow Sucursal</span>
-          <span className="promo-bar-item">💳 3 Cuotas Sin Interés en todos los productos</span>
         </div>
       </div>
 
