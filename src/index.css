@@ -165,6 +165,65 @@ button, input, select, textarea {
   transform: translateY(-5px);
 }
 
+/* Imperial Signboard Banner Header */
+.imperial-signboard {
+  position: relative;
+  margin: 0 auto 36px auto;
+  padding: 28px 36px;
+  max-width: 850px;
+  text-align: center;
+  background: 
+    /* Top-left corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.9'><path d='M3,24 V3 H24 M7,18 V7 H18'/></svg>"),
+    /* Bottom-right corner ornament */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none' stroke='%23ffd600' stroke-width='1.5' opacity='0.9'><path d='M29,8 V29 H8 M25,14 V25 H14'/></svg>"),
+    radial-gradient(circle at 50% 0%, rgba(142, 36, 170, 0.22), transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(0, 230, 118, 0.12), transparent 60%),
+    linear-gradient(135deg, rgba(8, 28, 18, 0.96) 0%, rgba(12, 36, 24, 0.96) 100%);
+  background-position: top 6px left 6px, bottom 6px right 6px, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  border: 1px solid rgba(255, 214, 0, 0.35);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55), inset 0 0 15px rgba(255, 214, 0, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.imperial-signboard-title {
+  font-size: 2.2rem;
+  font-family: var(--font-title);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 18px rgba(255, 214, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.9);
+  margin: 2px 0 0 0;
+}
+
+.imperial-signboard-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  font-weight: 500;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .imperial-signboard {
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .imperial-signboard-title {
+    font-size: 1.7rem;
+  }
+  .imperial-signboard-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
 /* Hero Video Section Full Width & Height */
 .hero-video-section {
   position: relative;
