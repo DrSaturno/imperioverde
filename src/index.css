@@ -567,38 +567,6 @@ button, input, select, textarea {
   transition: var(--transition-smooth);
 }
 
-/* Centered Product Category Badge Overlay */
-.category-center-badge {
-  position: absolute;
-  top: 38%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(6, 20, 13, 0.85);
-  border: 2px solid var(--action-yellow);
-  box-shadow: 0 0 20px rgba(255, 214, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.category-badge-icon {
-  font-size: 2.1rem;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
-}
-
-.premium-cover-card:hover .category-center-badge {
-  transform: translate(-50%, -55%) scale(1.15);
-  box-shadow: 0 0 30px rgba(255, 214, 0, 0.7), 0 0 15px rgba(0, 230, 118, 0.5);
-  border-color: #ffffff;
-}
-
 .premium-product-card-content {
   position: absolute;
   bottom: 0;

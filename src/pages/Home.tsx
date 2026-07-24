@@ -7,15 +7,15 @@ import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets,
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
-  { cat: 'Fertilizantes', label: 'Fertilizantes', subtitle: 'Nutrientes, bioestimulantes y pócimas', icon: '🧪', img: '/home/category-fertilizantes.jpg' },
-  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', subtitle: 'Suelos orgánicos, fibra de coco y perlita', icon: '🪨', img: '/home/category-sustratos.jpg' },
-  { cat: 'Iluminación', label: 'Iluminación', subtitle: 'Paneles LED Quantum, sodio y lámparas', icon: '💡', img: '/home/category-iluminacion.jpg' },
-  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', subtitle: 'Extractores ducto, coolers y filtros', icon: '💨', img: '/home/category-ventilacion.jpg' },
-  { cat: 'Macetas', label: 'Macetas y Carpas', subtitle: 'Macetas geotextiles, plásticas y carpas indoor', icon: '🪴', img: '/home/category-macetas.jpg' },
-  { cat: 'Riego', label: 'Riego y Auto', subtitle: 'Sistemas automáticos y bombas de goteo', icon: '💧', img: '/home/category-riego.jpg' },
-  { cat: 'Medición', label: 'Medición Digital', subtitle: 'Medidores de pH, EC digital y balanzas', icon: '📊', img: '/home/category-medicion.jpg' },
-  { cat: 'Control de Plagas', label: 'Control de Plagas', subtitle: 'Preventivos orgánicos y jabón potásico', icon: '🐛', img: '/home/category-plagas.jpg' },
-  { cat: 'Parafernalia', label: 'Parafernalia', subtitle: 'Picadores, sedas, bongs y accesorios', icon: '🦁', img: '/home/category-parafernalia.jpg' }
+  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: '/home/category-fertilizantes.jpg' },
+  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: '/home/category-sustratos.jpg' },
+  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: '/home/category-iluminacion.jpg' },
+  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: '/home/category-ventilacion.jpg' },
+  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: '/home/category-macetas.jpg' },
+  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: '/home/category-riego.jpg' },
+  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: '/home/category-medicion.jpg' },
+  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: '/home/category-plagas.jpg' },
+  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: '/home/category-parafernalia.jpg' }
 ];
 
 export const Home: React.FC = () => {
@@ -140,16 +140,10 @@ export const Home: React.FC = () => {
                 <img src={c.img} alt={c.label} className="premium-cover-card-img" loading="lazy" decoding="async" />
                 <div className="premium-cover-card-overlay"></div>
 
-                {/* Centered Glowing Product Category Badge */}
-                <div className="category-center-badge">
-                  <span className="category-badge-icon">{c.icon}</span>
-                </div>
-
                 <div className="premium-cover-card-content">
-                  <h3 style={{ fontSize: '1.2rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 800, textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>{c.label}</h3>
-                  <p style={{ fontSize: '0.8rem', color: 'rgba(240,248,242,0.85)', margin: '2px 0 6px 0', fontWeight: 500 }}>{c.subtitle}</p>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--action-yellow)', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: 700 }}>
-                    Explorar categoría <ArrowRight size={14} />
+                  <h3 style={{ fontSize: '1.1rem', color: '#fff', fontFamily: 'var(--font-title)', fontWeight: 700 }}>{c.label}</h3>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--accent-neon)', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '2px', fontWeight: 600 }}>
+                    Explorar <ArrowRight size={12} />
                   </span>
                 </div>
               </Link>
