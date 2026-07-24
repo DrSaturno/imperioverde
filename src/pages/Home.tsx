@@ -7,15 +7,15 @@ import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets,
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
-  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: '/home/category-fertilizantes.webp' },
-  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: '/home/category-sustratos.webp' },
-  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: '/home/category-iluminacion.webp' },
-  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: '/home/category-ventilacion.webp' },
-  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: '/home/category-macetas.webp' },
-  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: '/home/category-riego.webp' },
-  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: '/home/category-medicion.webp' },
-  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: '/home/category-plagas.webp' },
-  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: '/home/category-parafernalia.webp' }
+  { cat: 'Fertilizantes', label: 'Fertilizantes', icon: '🧪', img: '/home/category-fertilizantes.jpg' },
+  { cat: 'Sustratos y Medios', label: 'Sustratos y Medios', icon: '🪨', img: '/home/category-sustratos.jpg' },
+  { cat: 'Iluminación', label: 'Iluminación', icon: '💡', img: '/home/category-iluminacion.jpg' },
+  { cat: 'Ventilación y Clima', label: 'Ventilación y Clima', icon: '💨', img: '/home/category-ventilacion.jpg' },
+  { cat: 'Macetas', label: 'Macetas y Carpas', icon: '🪴', img: '/home/category-macetas.jpg' },
+  { cat: 'Riego', label: 'Riego y Auto', icon: '💧', img: '/home/category-riego.jpg' },
+  { cat: 'Medición', label: 'Medición Digital', icon: '📊', img: '/home/category-medicion.jpg' },
+  { cat: 'Control de Plagas', label: 'Control de Plagas', icon: '🐛', img: '/home/category-plagas.jpg' },
+  { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: '/home/category-parafernalia.jpg' }
 ];
 
 export const Home: React.FC = () => {
