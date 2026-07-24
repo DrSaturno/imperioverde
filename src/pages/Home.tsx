@@ -123,9 +123,6 @@ export const Home: React.FC = () => {
       {/* 2. SECTIONS PORTAL / CATEGORIES */}
       <section className="container">
         <div className="imperial-signboard">
-          <div style={{ display: 'inline-flex' }}>
-            <span className="badge badge-yellow">✨ CATÁLOGO OFICIAL ✨</span>
-          </div>
           <h2 className="imperial-signboard-title">Categorías de productos</h2>
           <p className="imperial-signboard-subtitle">Encontrá equipamiento certificado y fertilizantes originales</p>
         </div>
@@ -158,9 +155,6 @@ export const Home: React.FC = () => {
       {/* 3. RESOLVE PROBLEMS SECTION */}
       <section className="container">
         <div className="imperial-signboard">
-          <div style={{ display: 'inline-flex' }}>
-            <span className="badge badge-violet">🔮 ASESORAMIENTO ESPECIALIZADO 🔮</span>
-          </div>
           <h2 className="imperial-signboard-title">¿Qué misterio botánico necesitás resolver hoy?</h2>
           <p className="imperial-signboard-subtitle">Navegá nuestro imperio a partir del misterio o la necesidad en tu cultivo</p>
         </div>

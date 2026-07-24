@@ -165,58 +165,64 @@ button, input, select, textarea {
   transform: translateY(-5px);
 }
 
-/* Imperial Signboard Banner Header */
+/* Wooden Signboard Banner Header */
 .imperial-signboard {
   position: relative;
   margin: 0 auto 36px auto;
-  padding: 32px 40px;
-  max-width: 950px;
-  min-height: 200px;
+  padding: 36px 60px;
+  max-width: 900px;
+  min-height: 220px;
   text-align: center;
-  background-image: url('/home/imperial-signboard-bg.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: var(--radius-md);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 214, 0, 0.2);
+  background: url('/home/wooden-signboard-bg.png') no-repeat center center;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  overflow: hidden;
+  gap: 6px;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
 }
 
 .imperial-signboard-title {
   font-size: 2.3rem;
   font-family: var(--font-title);
-  font-weight: 800;
+  font-weight: 900;
   color: #ffffff;
   letter-spacing: -0.01em;
-  text-shadow: 0 0 20px rgba(255, 214, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.95);
-  margin: 4px 0 0 0;
+  text-shadow: 
+    0 2px 0 #3d1f0d, 
+    0 -2px 0 #3d1f0d, 
+    2px 0 0 #3d1f0d, 
+    -2px 0 0 #3d1f0d,
+    0 4px 12px rgba(0, 0, 0, 0.9);
+  margin: 0;
 }
 
 .imperial-signboard-subtitle {
-  color: rgba(240, 248, 242, 0.95);
+  color: #ffd600;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 700;
   max-width: 650px;
-  line-height: 1.45;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+  line-height: 1.4;
+  text-shadow: 
+    0 1px 0 #3d1f0d, 
+    0 -1px 0 #3d1f0d, 
+    1px 0 0 #3d1f0d, 
+    -1px 0 0 #3d1f0d,
+    0 2px 6px rgba(0, 0, 0, 0.9);
 }
 
 @media (max-width: 768px) {
   .imperial-signboard {
-    padding: 24px 20px;
+    padding: 24px 30px;
     margin-bottom: 24px;
-    min-height: 160px;
+    min-height: 170px;
   }
   .imperial-signboard-title {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
   .imperial-signboard-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
