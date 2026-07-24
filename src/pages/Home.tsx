@@ -154,7 +154,7 @@ export const Home: React.FC = () => {
       {/* 3. RESOLVE PROBLEMS SECTION */}
       <section className="container">
         <div className="imperial-wooden-banner-container">
-          <img src="/home/banner-resolver-signboard.png" alt="¿Qué misterio botánico necesitás resolver hoy?" className="imperial-wooden-banner" />
+          <img src="/home/banner-resolver-signboard.png" alt="¿Qué necesitás resolver hoy?" className="imperial-wooden-banner" />
         </div>
         <div className="grid grid-cols-3">
           {[
