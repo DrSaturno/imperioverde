@@ -165,64 +165,35 @@ button, input, select, textarea {
   transform: translateY(-5px);
 }
 
-/* Wooden Signboard Banner Header */
-.imperial-signboard {
-  position: relative;
-  margin: 0 auto 36px auto;
-  padding: 36px 60px;
-  max-width: 900px;
-  min-height: 220px;
-  text-align: center;
-  background: url('/home/wooden-signboard-bg.png') no-repeat center center;
-  background-size: 100% 100%;
+/* Imperial Wooden Signboard Banner Header */
+.imperial-wooden-banner-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 6px;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6));
+  margin-bottom: 36px;
+  width: 100%;
 }
 
-.imperial-signboard-title {
-  font-size: 2.3rem;
-  font-family: var(--font-title);
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  text-shadow: 
-    0 2px 0 #3d1f0d, 
-    0 -2px 0 #3d1f0d, 
-    2px 0 0 #3d1f0d, 
-    -2px 0 0 #3d1f0d,
-    0 4px 12px rgba(0, 0, 0, 0.9);
-  margin: 0;
+.imperial-wooden-banner {
+  display: block;
+  width: 100%;
+  max-width: 950px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.65));
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.imperial-signboard-subtitle {
-  color: #ffd600;
-  font-size: 1.1rem;
-  font-weight: 700;
-  max-width: 650px;
-  line-height: 1.4;
-  text-shadow: 
-    0 1px 0 #3d1f0d, 
-    0 -1px 0 #3d1f0d, 
-    1px 0 0 #3d1f0d, 
-    -1px 0 0 #3d1f0d,
-    0 2px 6px rgba(0, 0, 0, 0.9);
+.imperial-wooden-banner:hover {
+  transform: translateY(-3px) scale(1.015);
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 15px rgba(255, 214, 0, 0.2));
 }
 
 @media (max-width: 768px) {
-  .imperial-signboard {
-    padding: 24px 30px;
+  .imperial-wooden-banner-container {
     margin-bottom: 24px;
-    min-height: 170px;
   }
-  .imperial-signboard-title {
-    font-size: 1.6rem;
-  }
-  .imperial-signboard-subtitle {
-    font-size: 0.9rem;
+  .imperial-wooden-banner {
+    max-width: 100%;
   }
 }
 

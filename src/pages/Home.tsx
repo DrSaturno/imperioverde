@@ -122,9 +122,8 @@ export const Home: React.FC = () => {
 
       {/* 2. SECTIONS PORTAL / CATEGORIES */}
       <section className="container">
-        <div className="imperial-signboard">
-          <h2 className="imperial-signboard-title">Categorías de productos</h2>
-          <p className="imperial-signboard-subtitle">Encontrá equipamiento certificado y fertilizantes originales</p>
+        <div className="imperial-wooden-banner-container">
+          <img src="/home/banner-categorias-signboard.png" alt="Categorías de productos" className="imperial-wooden-banner" />
         </div>
 
         <div className="category-carousel">
@@ -154,9 +153,8 @@ export const Home: React.FC = () => {
 
       {/* 3. RESOLVE PROBLEMS SECTION */}
       <section className="container">
-        <div className="imperial-signboard">
-          <h2 className="imperial-signboard-title">¿Qué misterio botánico necesitás resolver hoy?</h2>
-          <p className="imperial-signboard-subtitle">Navegá nuestro imperio a partir del misterio o la necesidad en tu cultivo</p>
+        <div className="imperial-wooden-banner-container">
+          <img src="/home/banner-resolver-signboard.png" alt="¿Qué misterio botánico necesitás resolver hoy?" className="imperial-wooden-banner" />
         </div>
         <div className="grid grid-cols-3">
           {[
