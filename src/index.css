@@ -1062,3 +1062,77 @@ button, input, select, textarea {
   opacity: 1;
   background: linear-gradient(to top, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.7) 65%, rgba(3, 10, 6, 0.25) 100%);
 }
+
+.premium-cover-card.guide-editorial-card {
+  height: 330px;
+}
+
+.guide-editorial-card .premium-cover-card-img {
+  top: 50px;
+  height: calc(100% - 50px);
+}
+
+.guide-editorial-card .premium-cover-card-overlay {
+  top: 50px;
+}
+
+.guide-card-masthead {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 50px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #d8b45d;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 7, 0.98), rgba(12, 42, 25, 0.98) 50%, rgba(2, 12, 7, 0.98));
+  border-bottom: 1px solid rgba(216, 180, 93, 0.7);
+  box-shadow:
+    inset 0 -1px rgba(0, 0, 0, 0.7),
+    0 4px 14px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-title);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-shadow: 0 1px 8px rgba(216, 180, 93, 0.2);
+  pointer-events: none;
+}
+
+.guide-card-masthead::before,
+.guide-card-masthead::after {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 180, 93, 0.85));
+}
+
+.guide-card-masthead::after {
+  background: linear-gradient(90deg, rgba(216, 180, 93, 0.85), transparent);
+}
+
+.guide-card-masthead svg:last-of-type {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 600px) {
+  .premium-cover-card.guide-editorial-card {
+    height: 320px;
+  }
+
+  .guide-card-masthead {
+    height: 46px;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+  }
+
+  .guide-editorial-card .premium-cover-card-img,
+  .guide-editorial-card .premium-cover-card-overlay {
+    top: 46px;
+  }
+
+  .guide-editorial-card .premium-cover-card-img {
+    height: calc(100% - 46px);
+  }
+}

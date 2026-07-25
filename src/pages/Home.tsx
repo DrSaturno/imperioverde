@@ -452,9 +452,14 @@ export const Home: React.FC = () => {
               img: '/home/guide-prevencion-plagas.webp'
             }
           ].map(post => (
-            <Link key={post.slug} to={`/guias/${post.slug}`} className="premium-cover-card">
+            <Link key={post.slug} to={`/guias/${post.slug}`} className="premium-cover-card guide-editorial-card">
               <img src={post.img} alt={post.title} className="premium-cover-card-img" loading="lazy" decoding="async" />
               <div className="premium-cover-card-overlay"></div>
+              <div className="guide-card-masthead" aria-hidden="true">
+                <Leaf size={14} />
+                <span>LA GACETA VERDE</span>
+                <Leaf size={14} />
+              </div>
               
               <div className="premium-cover-card-content">
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-secondary)', width: '100%' }}>
