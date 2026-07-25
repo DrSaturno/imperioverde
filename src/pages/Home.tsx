@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
-import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Wind, Sparkles } from 'lucide-react';
+import { ArrowRight, Info, Leaf, Plus, Sparkles } from 'lucide-react';
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
@@ -18,6 +18,24 @@ const CATEGORIES = [
   { cat: 'Parafernalia', label: 'Parafernalia', icon: '🦁', img: '/home/category-parafernalia.jpg' }
 ];
 
+const TRUST_FEATURES = [
+  {
+    title: 'Compra 100% Segura',
+    description: 'Tus pagos se procesan con la seguridad oficial de Mercado Pago. Resguardo completo de tus datos.',
+    image: '/home/trust-secure-purchase.webp'
+  },
+  {
+    title: 'Marcas Oficiales',
+    description: 'Productos originales directo del fabricante (Amazing, Top Crop, Namasté, Powder Feeding).',
+    image: '/home/trust-official-brands.webp'
+  },
+  {
+    title: 'Soporte Poscompra',
+    description: '¿Inquietudes con el armado o la aplicación? Nos escribís al WhatsApp y te ayudamos.',
+    image: '/home/trust-aftercare.webp'
+  }
+];
+
 export const Home: React.FC = () => {
   const { addToCart, addKitToCart, sessionToken } = useCart();
   const { showToast } = useToast();
@@ -28,12 +46,20 @@ export const Home: React.FC = () => {
   useEffect(() => {
     // Fetch top products and kits
     dbService.getProducts().then(products => {
-      // Pick 4 popular products
-      // Alien Skin (p-001), Amazonia (p-002), Balanza (p-004), Extractor (p-031)
-      const popular = products.filter(p => 
-        ['p-001', 'p-002', 'p-004', 'p-031'].includes(p.id)
-      );
-      setFeaturedProducts(popular.length > 0 ? popular : products.slice(0, 4));
+      // Keep the current popular products first, then complete two rows.
+      const preferredNames = [
+        'Alien Skin Silicio 1lt',
+        'Amazonia Roots 150gr',
+        'Balanza Digital 500gr',
+        'Extractor Cooler de 4" a buje'
+      ];
+      const popular = preferredNames.flatMap(name => {
+        const product = products.find(item => item.name === name);
+        return product ? [product] : [];
+      });
+      const popularIds = new Set(popular.map(product => product.id));
+      const additional = products.filter(product => !popularIds.has(product.id));
+      setFeaturedProducts([...popular, ...additional].slice(0, 8));
     });
 
     dbService.getKits().then(setKits);
@@ -79,10 +105,6 @@ export const Home: React.FC = () => {
         <div className="hero-video-overlay" />
 
         <div className="container hero-video-content">
-          <div style={{ display: 'inline-flex' }}>
-            <span className="badge badge-yellow">✨ EL IMPERIO DE MARIHUANA MÁS MÁGICO ✨</span>
-          </div>
-
           <h1 className="hero-video-title">
             TODO LO QUE NECESITÁS PARA <br className="hero-br-desktop" />
             <span className="hero-highlight-text">CULTIVAR MEJOR</span>
@@ -221,9 +243,6 @@ export const Home: React.FC = () => {
       <section className="container" style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', padding: '60px 24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-glass)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--action-yellow)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '8px' }}>
-              <Sparkles size={16} /> CÓMBO BOTÁNICO CON DESCUENTOS MÁGICOS
-            </div>
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)' }}>Kits de Cultivo Alquímicos</h2>
           </div>
           <Link to="/kits" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
@@ -289,7 +308,6 @@ export const Home: React.FC = () => {
       <section className="container">
         <div className="glass-card violet home-hydro-banner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '820px', position: 'relative', zIndex: 1 }}>
-            <span className="badge badge-violet" style={{ alignSelf: 'flex-start' }}>🧪 SECCIÓN ESPECIALIZADA</span>
             <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
               Hidroponía: Cultivá en Agua con Precisión
             </h2>
@@ -318,9 +336,6 @@ export const Home: React.FC = () => {
       <section className="container">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-neon)', fontWeight: 600, fontSize: '0.9rem', marginBottom: '8px' }}>
-              <Flame size={16} /> LOS MÁS ELEGIDOS POR LA COMUNIDAD
-            </div>
             <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)' }}>Productos Recomendados</h2>
           </div>
           <Link to="/productos" className="btn btn-outline">
@@ -469,39 +484,19 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 9. CONFIANZA */}
-      <section className="container" style={{ borderTop: '1px solid var(--border-glass)', paddingTop: '60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', textAlign: 'center' }}>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.08)', padding: '16px', borderRadius: '50%', color: 'var(--accent-neon)' }}>
-              <ShieldCheck size={32} />
-            </div>
-            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-title)' }}>Compra 100% Segura</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', maxWidth: '280px' }}>
-              Tus pagos se procesan con la seguridad oficial de Mercado Pago. Resguardo completo de tus datos.
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.08)', padding: '16px', borderRadius: '50%', color: 'var(--accent-neon)' }}>
-              <Leaf size={32} />
-            </div>
-            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-title)' }}>Marcas Oficiales</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', maxWidth: '280px' }}>
-              Productos originales directo del fabricante (Amazing, Top Crop, Namasté, Powder Feeding).
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-            <div style={{ backgroundColor: 'rgba(0, 230, 118, 0.08)', padding: '16px', borderRadius: '50%', color: 'var(--accent-neon)' }}>
-              <Wind size={32} />
-            </div>
-            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-title)' }}>Soporte Poscompra</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', maxWidth: '280px' }}>
-              ¿Inquietudes con el armado o la aplicación? Nos escribís al WhatsApp y te ayudamos.
-            </p>
-          </div>
-
+      <section className="container home-trust-section">
+        <div className="home-trust-grid">
+          {TRUST_FEATURES.map(feature => (
+            <article key={feature.title} className="home-trust-card">
+              <div className="home-trust-visual">
+                <img src={feature.image} alt="" loading="lazy" decoding="async" />
+              </div>
+              <div className="home-trust-copy">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
