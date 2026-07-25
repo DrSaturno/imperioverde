@@ -55,15 +55,15 @@ export const Footer: React.FC = () => {
       <div className="container">
         
         {/* Core grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '40px', marginBottom: '40px' }}>
+        <div className="footer-core-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '40px', marginBottom: '40px' }}>
           
           {/* Logo & Intro */}
-          <div>
-            <img src="/logo-header.png" alt="Imperio Verde Growshop" style={{ display: 'block', width: '190px', maxWidth: '100%', height: 'auto', objectFit: 'contain', marginBottom: '16px' }} />
+          <div className="footer-brand">
+            <img className="footer-logo" src="/logo-header.png" alt="Imperio Verde Growshop" style={{ display: 'block', width: '190px', maxWidth: '100%', height: 'auto', objectFit: 'contain', marginBottom: '16px' }} />
             <p style={{ fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '20px' }}>
               No vendemos solo insumos: te acompañamos con asesoramiento técnico y soluciones completas para que logres la máxima producción en tu cultivo.
             </p>
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div className="footer-socials" style={{ display: 'flex', gap: '12px' }}>
               <a 
                 href="https://www.instagram.com/imperioverdegrowshop/"
                 target="_blank" 
@@ -95,20 +95,20 @@ export const Footer: React.FC = () => {
               Contacto y Local
               <span className="footer-heading-line"></span>
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.85rem' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+            <ul className="footer-contact-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.85rem' }}>
+              <li className="footer-contact-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                 <MapPin size={18} className="footer-icon" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <span>Avenida Triunvirato 4135, Local 5 y 7, CABA, Argentina</span>
               </li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <li className="footer-contact-item" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Phone size={16} className="footer-icon" style={{ flexShrink: 0 }} />
                 <a href="tel:+541153841079" className="footer-link">11 5384-1079</a>
               </li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <li className="footer-contact-item" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Mail size={16} className="footer-icon" style={{ flexShrink: 0 }} />
                 <a href="mailto:imperioverdegrowshop@gmail.com" className="footer-link">imperioverdegrowshop@gmail.com</a>
               </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <li className="footer-contact-item" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                 <Clock size={18} className="footer-icon" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <strong>Lunes a Viernes:</strong> 13:00 a 20:00 hs<br />
@@ -124,7 +124,7 @@ export const Footer: React.FC = () => {
               Ayuda al Cultivador
               <span className="footer-heading-line"></span>
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+            <ul className="footer-links-list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
               <li><Link to="/productos" className="footer-link">Ver Catálogo de Insumos</Link></li>
               <li><Link to="/kits" className="footer-link">Kits de Cultivo Inteligentes</Link></li>
               <li><Link to="/hidroponia" className="footer-link">Sistemas y Guías Hidropónicas</Link></li>
@@ -202,7 +202,7 @@ export const Footer: React.FC = () => {
           <div>
             © {new Date().getFullYear()} Imperio Verde Grow Shop. Todos los derechos reservados.
           </div>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'rgba(210,226,216,0.62)' }}>
+          <div className="footer-bottom-badges" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', color: 'rgba(210,226,216,0.62)' }}>
             <span>💳 Mercado Pago</span>
             <span>🚛 Correo Argentino / Andreani</span>
             <span>🏠 Retiro Local</span>
@@ -293,6 +293,41 @@ export const Footer: React.FC = () => {
           box-shadow: 0 0 0 3px rgba(142,36,170,0.14);
         }
         @media (max-width: 600px) {
+          .site-footer {
+            text-align: center;
+          }
+          .footer-core-grid {
+            justify-items: center;
+          }
+          .footer-core-grid > div {
+            width: 100%;
+          }
+          .footer-logo {
+            margin-right: auto;
+            margin-left: auto;
+          }
+          .footer-socials,
+          .footer-contact-item,
+          .footer-bottom,
+          .footer-bottom-badges {
+            justify-content: center !important;
+          }
+          .footer-heading-line {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          .footer-contact-list,
+          .footer-links-list {
+            align-items: center;
+          }
+          .footer-contact-item {
+            max-width: 340px;
+            text-align: center;
+          }
+          .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+          }
           .footer-newsletter {
             margin: 0;
           }
