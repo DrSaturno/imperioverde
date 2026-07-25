@@ -413,7 +413,7 @@ button, input, select, textarea {
   max-width: 1200px;
 }
 
-.home-hydro-banner {
+.glass-card.violet.home-hydro-banner {
   padding: 60px 40px;
   border-radius: var(--radius-lg) !important;
   border: 1px solid var(--border-violet) !important;
@@ -424,7 +424,7 @@ button, input, select, textarea {
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M26,8 V26 H8 M22,12 V22 H12'/></svg>"),
     linear-gradient(90deg, rgba(13, 6, 22, 0.98) 0%, rgba(18, 8, 28, 0.92) 42%, rgba(35, 11, 48, 0.42) 72%, rgba(18, 6, 27, 0.26) 100%),
     url('/home/hydroponics-banner-v2.webp');
-  background-position: top 8px left 8px, bottom 8px right 8px, 0 0, center;
+  background-position: top 8px left 8px, bottom 8px right 8px, 0 0, center right;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
   background-size: auto, auto, auto, cover;
   overflow: hidden;
@@ -450,17 +450,17 @@ button, input, select, textarea {
 }
 
 @media (max-width: 768px) {
-  .home-hydro-banner,
   .home-advice-banner {
     background-position: 66% center;
   }
 
-  .home-hydro-banner {
+  .glass-card.violet.home-hydro-banner {
     background-image:
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M2,20 V2 H20 M6,14 V6 H14'/></svg>"),
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28' fill='none' stroke='%238e24aa' stroke-width='1.5' opacity='0.85'><path d='M26,8 V26 H8 M22,12 V22 H12'/></svg>"),
       linear-gradient(180deg, rgba(13, 6, 22, 0.94) 0%, rgba(13, 6, 22, 0.92) 68%, rgba(25, 8, 35, 0.82) 100%),
       url('/home/hydroponics-banner-v2.webp');
+    background-position: top 8px left 8px, bottom 8px right 8px, 0 0, 66% center;
   }
 
   .home-advice-banner {
