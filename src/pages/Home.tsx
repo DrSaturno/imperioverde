@@ -163,42 +163,42 @@ export const Home: React.FC = () => {
               icon: '🌱',
               desc: 'Posibles causas de deficiencias, sustrato compactado o falta de enraizador. Ver soluciones.',
               path: '/resolver/crecimiento-lento',
-              img: '/home/solution-crecimiento-lento.webp'
+              img: '/home/solution-crecimiento-lento.jpg'
             },
             {
               title: 'Tengo una plaga o bichos',
               icon: '🐛',
               desc: 'Identificá araña roja, trips o mosca blanca y descubrí los preventivos y curativos ideales.',
               path: '/resolver/tengo-plagas',
-              img: '/home/solution-plagas.webp'
+              img: '/home/solution-plagas.jpg'
             },
             {
               title: 'Controlar humedad o temperatura',
               icon: '💨',
               desc: 'Equipamiento de extracción, coolers, filtros antiolor y medidores de rango térmico.',
               path: '/resolver/controlar-humedad',
-              img: '/home/solution-clima.webp'
+              img: '/home/solution-clima.jpg'
             },
             {
               title: 'Armar mi primer indoor',
               icon: '💡',
               desc: 'Calculadora de luces, extractores, carpas y configuraciones para comenzar de forma exitosa.',
               path: '/resolver/armar-indoor',
-              img: '/home/solution-primer-indoor.webp'
+              img: '/home/solution-primer-indoor.jpg'
             },
             {
               title: 'Empezar en Hidroponía',
               icon: '🧪',
               desc: 'Cultivo sin suelo. Baldes DWC, nutrientes tri-componente y medidores digitales EC.',
               path: '/hidroponia',
-              img: '/home/solution-hidroponia.webp'
+              img: '/home/solution-hidroponia.jpg'
             },
             {
               title: 'Mejorar peso y resina (Flora)',
               icon: '🌸',
               desc: 'Estimuladores de floración, azúcares carbohidratos y PK potenciadores de cogollos.',
               path: '/resolver/mejorar-floracion',
-              img: '/home/solution-floracion.webp'
+              img: '/home/solution-floracion.jpg'
             }
           ].map(item => (
             <Link key={item.path} to={item.path} className="premium-cover-card">

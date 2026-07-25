@@ -129,6 +129,8 @@ create_matching_resolver_banner.py
 tight_crop_user_banner.py
 create_clean_user_signboard.py
 process_section3_user_banner.py
+generate_anime_solutions.py
+
 
 
 

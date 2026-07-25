@@ -979,13 +979,14 @@ button, input, select, textarea {
 }
 
 .premium-cover-card.category-carousel-item {
-  flex: 0 0 256px;
-  height: 220px;
+  flex: 0 0 290px;
+  height: 360px;
 }
 
 @media (max-width: 600px) {
-  .category-carousel-item {
-    flex-basis: 210px;
+  .premium-cover-card.category-carousel-item {
+    flex-basis: 240px;
+    height: 300px;
   }
 }
 
