@@ -36,6 +36,12 @@ const TRUST_FEATURES = [
   }
 ];
 
+const KIT_IMAGES: Record<string, string> = {
+  'Kit Nutrición Esencial': '/home/kit-nutricion-esencial.webp',
+  'Kit Indoor Pro Ciclo Completo': '/home/kit-indoor-pro.webp',
+  'Kit Nutrición Hidroponía Inicial': '/home/kit-hidroponia-inicial.webp'
+};
+
 export const Home: React.FC = () => {
   const { addToCart, addKitToCart, sessionToken } = useCart();
   const { showToast } = useToast();
@@ -252,10 +258,18 @@ export const Home: React.FC = () => {
 
         <div className="grid grid-cols-3">
           {kits.map(kit => (
-            <div key={kit.id} className="glass-card" style={{ borderTop: '4px solid var(--action-yellow)', display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div key={kit.id} className="glass-card home-kit-card" style={{ borderTop: '4px solid var(--action-yellow)', display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <span className="badge badge-yellow">¡AHORRÁ {kit.discount_percentage}%!</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'capitalize' }}>Nivel: {kit.difficulty_level}</span>
+              </div>
+              <div className="home-kit-visual">
+                <img
+                  src={KIT_IMAGES[kit.name] ?? '/home/kit-nutricion-esencial.webp'}
+                  alt={`Escena de ${kit.name}`}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div>
                 <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>{kit.name}</h3>
