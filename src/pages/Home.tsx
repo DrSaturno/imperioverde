@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { dbService, Product, Kit } from '../services/db';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
-import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Droplets, Wind, Sparkles } from 'lucide-react';
+import { ArrowRight, HelpCircle, ShieldCheck, Flame, Info, Leaf, Plus, Wind, Sparkles } from 'lucide-react';
 import { getProductImage } from './Shop';
 
 const CATEGORIES = [
@@ -288,7 +288,7 @@ export const Home: React.FC = () => {
       {/* 5. SECCIÓN DESTACADA: HIDROPONÍA */}
       <section className="container">
         <div className="glass-card violet home-hydro-banner">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '820px', position: 'relative', zIndex: 1 }}>
             <span className="badge badge-violet" style={{ alignSelf: 'flex-start' }}>🧪 SECCIÓN ESPECIALIZADA</span>
             <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
               Hidroponía: Cultivá en Agua con Precisión
@@ -309,15 +309,6 @@ export const Home: React.FC = () => {
               >
                 Consultar Técnico en Hidro
               </a>
-            </div>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {/* Visual hydro element */}
-            <div style={{ backgroundColor: 'rgba(0,0,0,0.4)', border: '1px solid rgba(142, 36, 170, 0.2)', padding: '24px', borderRadius: 'var(--radius-md)', textAlign: 'center', width: '100%', maxWidth: '280px' }}>
-              <Droplets size={40} style={{ color: '#e040fb', marginBottom: '12px' }} />
-              <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-title)', fontWeight: 600, marginBottom: '6px' }}>¿Empezando en Hidro?</div>
-              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>Resolvé nuestro cuestionario inteligente y te armamos la configuración ideal.</p>
-              <Link to="/hidroponia" className="btn btn-violet" style={{ padding: '8px 16px', fontSize: '0.8rem', width: '100%' }}>Resolver Cuestionario</Link>
             </div>
           </div>
         </div>
