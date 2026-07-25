@@ -201,7 +201,7 @@ export const Home: React.FC = () => {
               img: '/home/solution-floracion.jpg'
             }
           ].map(item => (
-            <Link key={item.path} to={item.path} className="premium-cover-card">
+            <Link key={item.path} to={item.path} className="premium-cover-card solver-card">
               <img src={item.img} alt={item.title} className="premium-cover-card-img" loading="lazy" decoding="async" />
               <div className="premium-cover-card-overlay"></div>
               
