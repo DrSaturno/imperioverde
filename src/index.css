@@ -1052,3 +1052,13 @@ button, input, select, textarea {
   background: linear-gradient(to top, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.7) 65%, rgba(3, 10, 6, 0.25) 100%);
 }
 
+.premium-cover-card.category-carousel-item .premium-cover-card-overlay,
+.premium-cover-card.category-carousel-item:hover .premium-cover-card-overlay {
+  opacity: 0;
+}
+
+.premium-cover-card.category-carousel-item:active .premium-cover-card-overlay,
+.premium-cover-card.category-carousel-item:focus-visible .premium-cover-card-overlay {
+  opacity: 1;
+  background: linear-gradient(to top, rgba(3, 10, 6, 0.98) 0%, rgba(3, 10, 6, 0.7) 65%, rgba(3, 10, 6, 0.25) 100%);
+}
