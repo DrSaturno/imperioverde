@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import { ToastProvider } from './context/ToastContext';
 import { Layout } from './components/Layout';
 import { ScrollToTop } from './components/ScrollToTop';
+import { MaintenanceGate } from './components/MaintenanceGate';
 
 // Public Pages
 import { Home } from './pages/Home';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
     <CartProvider>
       <BrowserRouter>
         <ScrollToTop />
+        <MaintenanceGate>
         <Routes>
           
           {/* PUBLIC CLIENT ROUTING */}
@@ -68,6 +70,7 @@ const App: React.FC = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>
+        </MaintenanceGate>
       </BrowserRouter>
     </CartProvider>
     </ToastProvider>
