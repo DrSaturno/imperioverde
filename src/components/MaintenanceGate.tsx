@@ -72,27 +72,19 @@ export const MaintenanceGate: React.FC<{ children: React.ReactNode }> = ({ child
         justifyContent: 'center',
       }}
     >
-      {/* Fondo: la misma imagen, desenfocada y a pantalla completa (sin franjas vacías) */}
-      <ConstructionPicture
-        alt=""
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          filter: 'blur(28px) brightness(0.7)',
-          transform: 'scale(1.1)',
-        }}
-      />
-      {/* Imagen completa, sin recortar, en cualquier pantalla */}
+      {/* La imagen llena toda la pantalla (sin franjas). Si la proporción del
+          dispositivo difiere de la de la imagen, se recorta un poco el borde
+          sobrante. */}
       <ConstructionPicture
         alt={IMAGE_ALT}
         style={{
-          position: 'relative',
           width: '100%',
           height: '100%',
-          objectFit: 'contain',
+          objectFit: 'cover',
+          // Centrado a los costados y anclado arriba: el logo y el cartel nunca
+          // se cortan; si sobra altura/ancho se recorta el pasto de abajo.
+          objectPosition: 'center top',
+          display: 'block',
         }}
       />
     </main>
